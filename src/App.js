@@ -9,6 +9,8 @@ import Film from './pages/admin/Film';
 import User from './pages/admin/User';
 import AddNew from './pages/admin/AddNew';
 import AdminHomePage from './pages/admin/AdminHomePage';
+import SignIn from './pages/customer/sign-in/SignIn';
+import Login from './pages/customer/login/Login';
 
 function App() {
   return (
@@ -25,7 +27,12 @@ function App() {
           <Route path='film' element={<Film />}></Route>
           <Route path='addnew' element={<AddNew />}></Route>
         </Route>
-
+        <Route path='sign-in'>
+          <Route index element={<SignIn />}></Route>
+        </Route>
+        <Route path='login'>
+          <Route index element={<Login/>}></Route>
+        </Route>
       </Routes>
 
     </BrowserRouter>

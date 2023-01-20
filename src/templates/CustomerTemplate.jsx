@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Navigate, NavLink, Outlet } from 'react-router-dom';
 
 class CustomerTemplate extends Component {
     render() {
@@ -36,8 +36,9 @@ class CustomerTemplate extends Component {
                                     </li>
 
                                 </ul>
-                                <button className='btn btn-default text-white border-white'>Đăng ký</button>
-                                <button className='btn btn-default bg-light ml-2'>Đăng nhập</button>
+                            <button className='btn btn-default'><NavLink to="/sign-in">CLICK ME PLEASE</NavLink></button>
+                                
+                                <button className='btn btn-default bg-light ml-2'><NavLink to="/login">Đăng nhập</NavLink></button>
                             </div>
                         </nav>
                     </div>
