@@ -30,6 +30,7 @@ class CommingSoon extends Component {
     //         console.log(error);
     //     })
     }
+    
     render() {
         return (
             <>
