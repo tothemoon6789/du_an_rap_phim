@@ -1,0 +1,1 @@
+export const CHANGE_DARK_THEME = 'CHANGE_DARK_THEME'
