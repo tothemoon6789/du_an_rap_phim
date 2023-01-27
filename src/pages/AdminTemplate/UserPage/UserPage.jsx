@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import React, { Component } from 'react';
-import { apiUser, apiUserOnPage } from '../../../service/apiUser';
+// import { apiUser, apiUserOnPage } from '../../../service/apiUser';
 import UserList from './UserList';
 
 class UserPage extends Component {
