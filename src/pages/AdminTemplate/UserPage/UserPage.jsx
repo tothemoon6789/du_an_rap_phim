@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { apiUser, apiUserOnPage } from '../../../service/apiUser';
 import UserList from './UserList';
 
 class UserPage extends Component {
@@ -106,30 +107,26 @@ class UserPage extends Component {
             data: null,
             error: null,
         })
-        axios({
-            url: `https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP05&soTrang=${currentPage}&soPhanTuTrenTrang=20`,
-            method: 'GET',
-            headers: {
-                TokenCybersoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzOSIsIkhldEhhblN0cmluZyI6IjI0LzA3LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY5MDE1NjgwMDAwMCIsIm5iZiI6MTY2MTcwNjAwMCwiZXhwIjoxNjkwMzA0NDAwfQ.v3QBEWqiclIwpSJXtVil8Lu30xYH1J5FT82rQrUyv1c',
-            }
-        })
-            .then((res) => {
-                // console.log(res); 
-                this.setState({
-                    ...this.state,
-                    loading: false,
-                    data: res.data.content.items,
-                    error: null,
-                })
-            })
-            .catch((error) => {
-                this.setState({
-                    ...this.state,
-                    loading: true,
-                    data: null,
-                    error: error,
-                })
-            })
+        // apiUserOnPage
+
+        
+        //     .then((res) => {
+        //         // console.log(res); 
+        //         this.setState({
+        //             ...this.state,
+        //             loading: false,
+        //             data: res.data.content.items,
+        //             error: null,
+        //         })
+        //     })
+        //     .catch((error) => {
+        //         this.setState({
+        //             ...this.state,
+        //             loading: true,
+        //             data: null,
+        //             error: error,
+        //         })
+        //     })
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevState.currentPage!==this.state.currentPage) {
@@ -137,30 +134,24 @@ class UserPage extends Component {
                 ...this.state,
                 loading: true,
             })
-            axios({
-                url: `https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP05&soTrang=${this.state.currentPage}&soPhanTuTrenTrang=20`,
-                method: 'GET',
-                headers: {
-                    TokenCybersoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzOSIsIkhldEhhblN0cmluZyI6IjI0LzA3LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY5MDE1NjgwMDAwMCIsIm5iZiI6MTY2MTcwNjAwMCwiZXhwIjoxNjkwMzA0NDAwfQ.v3QBEWqiclIwpSJXtVil8Lu30xYH1J5FT82rQrUyv1c',
-                }
-            })
-                .then((res) => {
-                    // console.log(res); 
-                    this.setState({
-                        ...this.state,
-                        loading: false,
-                        data: res.data.content.items,
-                        error: null,
-                    })
-                })
-                .catch((error) => {
-                    this.setState({
-                        ...this.state,
-                        loading: true,
-                        data: null,
-                        error: error,
-                    })
-                })
+            // apiUser
+            //     .then((res) => {
+            //         // console.log(res); 
+            //         this.setState({
+            //             ...this.state,
+            //             loading: false,
+            //             data: res.data.content.items,
+            //             error: null,
+            //         })
+            //     })
+            //     .catch((error) => {
+            //         this.setState({
+            //             ...this.state,
+            //             loading: true,
+            //             data: null,
+            //             error: error,
+            //         })
+            //     })
         }
     }
     renderUserList = () => {
