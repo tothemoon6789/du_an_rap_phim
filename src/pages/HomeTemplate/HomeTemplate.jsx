@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 import { changeDarkThemeAction } from '../../store/reducer/config/action';
 import { parseJSON } from 'jquery';
 class CustomerTemplate extends Component {
@@ -153,29 +153,31 @@ class CustomerTemplate extends Component {
             })
         }
        
-        axios({
-            method: 'GET',
-            url: 'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01',
-            headers: {
-                TokenCybersoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzOSIsIkhldEhhblN0cmluZyI6IjI0LzA3LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY5MDE1NjgwMDAwMCIsIm5iZiI6MTY2MTcwNjAwMCwiZXhwIjoxNjkwMzA0NDAwfQ.v3QBEWqiclIwpSJXtVil8Lu30xYH1J5FT82rQrUyv1c'
-            }
-        })
-            .then((res) => {
-                this.setState({
-                    ...this.state,
-                    loading: false,
-                    data: res,
-                    error: null
-                })
-            })
-            .catch((error) => {
-                this.setState({
-                    ...this.state,
-                    loading: false,
-                    data: null,
-                    error: error,
-                })
-            })
+        // axios({
+        //     method: 'GET',
+        //     url: 'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01',
+        //     headers: {
+        //         TokenCybersoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzOSIsIkhldEhhblN0cmluZyI6IjI0LzA3LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY5MDE1NjgwMDAwMCIsIm5iZiI6MTY2MTcwNjAwMCwiZXhwIjoxNjkwMzA0NDAwfQ.v3QBEWqiclIwpSJXtVil8Lu30xYH1J5FT82rQrUyv1c'
+        //     }
+        // })
+        //     .then((res) => {
+        //         this.setState({
+        //             ...this.state,
+        //             loading: false,
+        //             data: res,
+        //             error: null
+        //         })
+        //     })
+        //     .catch((error) => {
+        //         this.setState({
+        //             ...this.state,
+        //             loading: false,
+        //             data: null,
+        //             error: error,
+        //         })
+        //     })
+
+
     }
     componentDidUpdate (prevProps,prevState){
         if(prevState.theme !== this.state.theme){

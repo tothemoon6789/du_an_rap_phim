@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { Component } from 'react';
 import { apiUser, apiUserOnPage } from '../../../service/apiUser';
 import UserList from './UserList';
@@ -109,7 +109,7 @@ class UserPage extends Component {
         })
         // apiUserOnPage
 
-        
+
         //     .then((res) => {
         //         // console.log(res); 
         //         this.setState({
@@ -119,6 +119,7 @@ class UserPage extends Component {
         //             error: null,
         //         })
         //     })
+
         //     .catch((error) => {
         //         this.setState({
         //             ...this.state,
@@ -135,6 +136,7 @@ class UserPage extends Component {
                 loading: true,
             })
             // apiUser
+
             //     .then((res) => {
             //         // console.log(res); 
             //         this.setState({

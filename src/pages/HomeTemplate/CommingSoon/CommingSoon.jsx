@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { Component } from 'react';
 import Film from '../../../components/Film/Film';
 import { filmApi } from '../../../service/filmApi';
