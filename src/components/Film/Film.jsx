@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link, Navigate, NavLink } from 'react-router-dom';
 const textStyleOne = {
     maxWidth: '100%',
     display: '-webkit-box',

@@ -80,19 +80,19 @@ class CustomerTemplate extends Component {
                                 <div className="col-md-4">
                                     <h4>GÓC ĐIỆN ẢNH</h4>
                                     <ul className='list-unstyled'>
-                                        <li><a href="#">THỂ LOẠI PHIM</a></li>
-                                        <li><a href="#">BÌNH LUẬN PHIM</a></li>
-                                        <li><a href="#">BLOG ĐIỆN ẢNH</a></li>
-                                        <li><a href="#">PHIM HAY THÁNG</a></li>
+                                        <li><a href="">THỂ LOẠI PHIM</a></li>
+                                        <li><a href="">BÌNH LUẬN PHIM</a></li>
+                                        <li><a href="">BLOG ĐIỆN ẢNH</a></li>
+                                        <li><a href="">PHIM HAY THÁNG</a></li>
                                     </ul>
                                 </div>
                                 <div className="col-md-4">
                                     <h4>HỖ TRỢ</h4>
                                     <ul className='list-unstyled'>
-                                        <li><a href="#">GÓP Ý</a></li>
-                                        <li><a href="#">SALE &amp; SERVICES</a></li>
-                                        <li><a href="#">RẠP</a></li>
-                                        <li><a href="#">GIÁ VÉ TUYỂN DỤNG</a></li>
+                                        <li><a href="">GÓP Ý</a></li>
+                                        <li><a href="">SALE &amp; SERVICES</a></li>
+                                        <li><a href="">RẠP</a></li>
+                                        <li><a href="">GIÁ VÉ TUYỂN DỤNG</a></li>
                                     </ul>
                                 </div>
                                 <div className="col-md-4">
