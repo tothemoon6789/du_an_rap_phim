@@ -15,22 +15,22 @@ class AdminTemplate extends Component {
                         </div>
                         <ul className='list-group'>
                             <li className='list-item p-2'>
-                                <NavLink  className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='/' >Trang chủ</NavLink>
+                                <NavLink  className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='' >Trang chủ</NavLink>
                             </li>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='/manage-user'>Quản trị người dùng</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='manage-user'>Quản trị người dùng</NavLink>
                             </li>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='/film'>Quản lý phim</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='film'>Quản lý phim</NavLink>
                             </li>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='/addnew'>Thêm mới phim</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='addnew'>Thêm mới phim</NavLink>
                             </li>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='/show-time'>Tạo lịch chiếu</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='show-time'>Tạo lịch chiếu</NavLink>
                             </li>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='/add-new-user'>Thêm người dùng</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='add-new-user'>Thêm người dùng</NavLink>
                             </li>
                             
                         </ul>
