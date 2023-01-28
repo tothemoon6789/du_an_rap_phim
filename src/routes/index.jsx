@@ -33,6 +33,10 @@ const route = [
             {
                 path: 'sign-in',
                 element: lazy(() => import('../pages/HomeTemplate/SignInPage/SignInPage')),
+            },
+            {
+                path: '*',
+                element: lazy(() => import('../pages/HomeTemplate/HomePage/HomePage'))
             }
         ]
     },
