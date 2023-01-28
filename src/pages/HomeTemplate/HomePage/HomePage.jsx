@@ -15,22 +15,26 @@ class HomePage extends Component {
             film: {
                 loading: false,
                 data: null,
-                error: null,
+                error: true,
             },
             theater: {
                 loading: false,
                 data: null,
-                error: null,
+                error: true,
             },
             theaterDetail: {
                 loading: false,
                 data: [],
-                error: null,
+                error: true,
             },
             theaterCode: 'CGV',
             theaterCodeDetail: "cgv-aeon-tan-phu",
         }
         this.refToScroll = React.createRef()
+        this.timerFilms = null
+        this.timerTheater = null
+        this.timerShowTimeByTheater = null
+
     }
     render() {
         const { film, theater, theaterDetail } = this.state
@@ -104,7 +108,7 @@ class HomePage extends Component {
                     <div className='container text-dark'>
                         <div className='row'>
                             {/* loading ripple */}
-                            {film.loading ? <div class="lds-ripple"><div></div><div></div></div> : ''}
+                            {film.loading ? <div className="lds-ripple"><div></div><div></div></div> : ''}
                             {this.renderShowingFilm()}
                         </div>
                     </div>
@@ -116,7 +120,7 @@ class HomePage extends Component {
                             <div className='col-md-2 p-sm-0 p-md-5' >
                                 <div className="row">
                                     {/* loading ripple */}
-                                    {theater.loading ? <div class="lds-ripple"><div></div><div></div></div> : ''}
+                                    {theater.loading ? <div className="lds-ripple"><div></div><div></div></div> : ''}
                                     {this.renderTheater()}
                                 </div>
                             </div>
@@ -124,7 +128,7 @@ class HomePage extends Component {
                                 <div className="row">
                                     <div className='col-md-4 border'>
                                         {/* loading ripple */}
-                                        {theaterDetail.loading ? <div class="lds-ripple"><div></div>{console.log(this.state.theater.error)}<div></div></div> : ''}
+                                        {theaterDetail.loading ? <div className="lds-ripple"><div></div><div></div></div> : ''}
                                         {this.renderTheaterDetail()}
 
 
@@ -161,87 +165,119 @@ class HomePage extends Component {
             }
 
         })
-        filmApi
-            .then((res) => {
-                this.setState({
-                    ...this.state,
-                    film: {
-                        ...this.state.film,
-                        loading: false,
-                        data: res.data.content,
+        this.timerFilms = setInterval(() => {
+            console.log('SETINTERVAL film');
+            filmApi
+                .then((res) => {
+                    this.setState({
+                        ...this.state,
+                        film: {
+                            ...this.state.film,
+                            loading: false,
+                            data: res.data.content,
+                            error: false,
 
+                        }
+                    })
+                })
+                .catch((error) => {
+                    this.setState({
+                        ...this.state,
+                        film: {
+                            ...this.state.film,
+                            loading: true,
+                            data: null,
+                            error: true,
+                        }
+
+                    })
+                })
+        }, 5000);
+        this.timerTheater = setInterval(() => {
+            console.log('setinterval theater');
+            apiTheater
+                .then((res) => {
+                    this.setState({
+                        ...this.state,
+                        theater: {
+                            ...this.state.theater,
+                            loading: false,
+                            data: res.data.content,
+                            error: false,
+
+                        }
+                    })
+                })
+                .catch((error) => {
+                    this.setState({
+                        ...this.state,
+                        theater: {
+                            ...this.state.theater,
+                            loading: true,
+                            data: null,
+                            error: true,
+                        }
+
+                    })
+                })
+        }, 5000);
+        this.timerShowTimeByTheater = setInterval(() => {
+            console.log('setinterval theater detail');
+            apiShowTimeByTheater
+                .then((res) => {
+                    const findIndex = res.data.content.findIndex((theater) => {
+                        return theater.maHeThongRap === this.state.theaterCode
+                    })
+                    if (findIndex !== -1) {
+                        this.setState({
+                            ...this.state,
+                            theaterDetail: {
+                                ...this.state.theaterDetail,
+                                loading: false,
+                                data: res.data.content[findIndex].lstCumRap,
+                                error: false,
+                            }
+
+                        })
                     }
                 })
-            })
-            .catch((error) => {
-                this.setState({
-                    ...this.state,
-                    film: {
-                        ...this.state.film,
-                        loading: true,
-                        data: null,
-                        error: error
-                    }
-
-                })
-            })
-        apiTheater
-            .then((res) => {
-                console.log(`in then apiTheater: ${res}`);
-                this.setState({
-                    ...this.state,
-                    theater: {
-                        ...this.state.theater,
-                        loading: false,
-                        data: res.data.content,
-
-                    }
-                })
-            })
-            .catch((error) => {
-                console.log(`in err apiTheater: ${error}`);
-                this.setState({
-                    ...this.state,
-                    theater: {
-                        ...this.state.theater,
-                        loading: true,
-                        data: null,
-                        error: error
-                    }
-
-                })
-            })
-        apiShowTimeByTheater
-            .then((res) => {
-                const findIndex = res.data.content.findIndex((theater) => {
-                    return theater.maHeThongRap === this.state.theaterCode
-                })
-                if (findIndex !== -1) {
+                .catch((error) => {
                     this.setState({
                         ...this.state,
                         theaterDetail: {
                             ...this.state.theaterDetail,
-                            loading: false,
-                            data: res.data.content[findIndex].lstCumRap,
+                            loading: true,
+                            error: true,
                         }
 
                     })
-                }
-            })
-            .catch((error) => {
-                this.setState({
-                    ...this.state,
-                    theaterDetail: {
-                        ...this.state.theaterDetail,
-                        loading: true,
-                        error: error,
-                    }
-
                 })
-            })
-        
+
+        }, 5000);
     }
     componentDidUpdate(prevProps, prevState) {
+        if (prevState.film.error !== this.state.film.error) {
+            
+            if (!this.state.film.error) {
+                console.log('no error in  film');
+                clearInterval(this.timerFilms)
+            }
+        }
+        if (prevState.theater.error !== this.state.theater.error) {
+            
+            if (!this.state.theater.error) {
+                console.log('no error in theater');
+                clearInterval(this.timerTheater)
+            }
+        }
+        if (prevState.theaterDetail.error !== this.state.error) {
+            
+            if (!this.state.theaterDetail.error) {
+                console.log('no error in  theater detail');
+                clearInterval(this.timerShowTimeByTheater)
+            }
+        }
+        
         if (prevState.theaterCode !== this.state.theaterCode) {
             apiShowTimeByTheater
                 .then((res) => {
@@ -272,6 +308,36 @@ class HomePage extends Component {
                     })
                 })
         }
+        // ! the second time in componentdidupdate
+        // if (this.state.film.error === 'erro') {
+        //     console.log("THE SECOND TIME IN FILM");
+        //     filmApi
+        //     .then((res) => {
+        //         this.setState({
+        //             ...this.state,
+        //             film: {
+        //                 ...this.state.film,
+        //                 loading: false,
+        //                 data: res.data.content,
+
+        //             }
+        //         })
+        //     })
+        //     .catch((error) => {
+        //         console.log('THE SECONTIME IN FILM IN CATCH');
+        //         console.log(error);
+        //         this.setState({
+        //             ...this.state,
+        //             film: {
+        //                 ...this.state.film,
+        //                 loading: true,
+        //                 data: null,
+        //                 error: "error",
+        //             }
+
+        //         })
+        //     })
+        // }
         console.log(this.state);
     }
     renderShowingFilm = () => {
