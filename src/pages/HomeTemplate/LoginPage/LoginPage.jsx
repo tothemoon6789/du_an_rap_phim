@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Login extends Component {
+class LoginPage extends Component {
     render() {
         return (
             <form onClick={(event) => {
@@ -21,4 +21,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default LoginPage;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import axios from 'axios';
 import { changeDarkThemeAction } from '../../store/reducer/config/action';
 import { parseJSON } from 'jquery';
-class CustomerTemplate extends Component {
+class HomeTemplate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -217,4 +217,4 @@ const mapDispatchToProp = (dispatch) => {
         }
     }
 }
-export default connect(mapStateToProp, mapDispatchToProp)(CustomerTemplate);
+export default connect(mapStateToProp, mapDispatchToProp)(HomeTemplate);

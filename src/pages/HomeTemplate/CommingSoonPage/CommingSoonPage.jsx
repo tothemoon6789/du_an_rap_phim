@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Film from '../../../components/Film/Film';
 import { filmApi } from '../../../service/filmApi';
 
-class CommingSoon extends Component {
+class CommingSoonPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,4 +59,4 @@ class CommingSoon extends Component {
     }
 }
 
-export default CommingSoon;
+export default CommingSoonPage;

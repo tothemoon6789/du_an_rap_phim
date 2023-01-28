@@ -8,7 +8,7 @@ import Theater from './Theater';
 import TheaterDetail from './TheaterDetail';
 // import 'swiper/css'
 
-class Home extends Component {
+class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -351,4 +351,4 @@ class Home extends Component {
         })
     }
 }
-export default Home;
+export default HomePage;

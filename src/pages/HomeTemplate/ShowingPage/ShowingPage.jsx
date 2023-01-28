@@ -5,7 +5,7 @@ import Film from '../../../components/Film/Film';
 import { filmApi } from '../../../service/filmApi';
 
 
-class Showing extends Component {
+class ShowingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,4 +66,4 @@ class Showing extends Component {
     }
 }
 
-export default Showing;
+export default ShowingPage;

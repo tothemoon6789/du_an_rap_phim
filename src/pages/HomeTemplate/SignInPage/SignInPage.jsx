@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Row from './Row';
 import { NavLink } from 'react-router-dom';
 
-class SignIn extends Component {
+class SingIngPage extends Component {
     render() {
         return (
             <div className='container'>
@@ -31,4 +31,4 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn;
+export default SingIngPage;

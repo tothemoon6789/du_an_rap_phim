@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
-class Admin extends Component {
+class AdminTemplate extends Component {
     render() {
         // console.log('admin here');
         return (
@@ -18,7 +18,7 @@ class Admin extends Component {
                                 <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to=''>Trang chủ</NavLink>
                             </li>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='user'>Quản trị người dùng</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='manage-user'>Quản trị người dùng</NavLink>
                             </li>
                             <li className='list-item p-2'>
                                 <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='film'>Quản lý phim</NavLink>
@@ -27,7 +27,7 @@ class Admin extends Component {
                                 <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='addnew'>Thêm mới phim</NavLink>
                             </li>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='showtimes'>Tạo lịch chiếu</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='show-time'>Tạo lịch chiếu</NavLink>
                             </li>
                             <li className='list-item p-2'>
                                 <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='add-new-user'>Thêm người dùng</NavLink>
@@ -43,4 +43,4 @@ class Admin extends Component {
     }
 }
 
-export default Admin;
+export default AdminTemplate;

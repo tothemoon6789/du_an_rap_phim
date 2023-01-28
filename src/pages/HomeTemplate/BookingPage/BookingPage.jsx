@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Booking extends Component {
+class BookingPage extends Component {
     render() {
         return (
             <div className='container'>
@@ -261,4 +261,4 @@ class Booking extends Component {
     }
 }
 
-export default Booking;
+export default BookingPage;
