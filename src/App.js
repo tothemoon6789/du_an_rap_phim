@@ -42,11 +42,11 @@ function App() {
         <Route path='admin' element={<AdminTemplate />}>
 
           <Route index element={<DashboardPage />}></Route>
-          {/* <Route path='manage-user' element={<UserPage />}></Route>
+          <Route path='manage-user' element={<UserPage />}></Route>
           <Route path='film' element={<ManageFilmPage />}></Route>
           <Route path='addnew' element={<AddNewPage />}></Route>
           <Route path='show-time' element={<ShowTimesPage />}></Route>
-          <Route path='add-new-user' element={<AddNewUserPage />}></Route> */}
+          <Route path='add-new-user' element={<AddNewUserPage />}></Route>
         </Route>
         <Route path='user'>
           <Route index element={<UserTemplate />}></Route>
