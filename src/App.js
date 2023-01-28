@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes , Route} from 'react-router-dom';
+// import renderRoute from './routes';
 
 // ! Home
 import HomeTemplate from './pages/HomeTemplate/HomeTemplate';
@@ -19,8 +20,10 @@ import ManageFilmPage from './pages/AdminTemplate/ManageFilmPage/ManageFilmPage'
 import AddNewPage from './pages/AdminTemplate/AddNewPage/AddNewPage';
 import ShowTimesPage from './pages/AdminTemplate/ShowTimesPage/ShowTimesPage';
 import AddNewUserPage from './pages/AdminTemplate/AddNewUserPage/AddNewUserPage';
+
 // ! User
 import UserTemplate from './pages/UserTemplate/UserTemplate';
+
 // import renderRoute from './routes';
 // import { Suspense } from 'react';
 
@@ -52,19 +55,19 @@ function App() {
           <Route index element={<UserTemplate />}></Route>
         </Route>
        
-       
+       {/* {this.renderRoute()} */}
       </Routes>
 
     </BrowserRouter>
 
     
-    // <Suspense fallback={<div className='d-flex justify-content-center'><div className='loader'></div></div>}>
     // <BrowserRouter>
+    // <Suspense fallback={<div className='d-flex justify-content-center'><div className='loader'></div></div>}>
     //   <Routes>
     // {renderRoute()}
     //   </Routes>
-    // </BrowserRouter>
     // </Suspense>
+    // </BrowserRouter>
   );
 }
 

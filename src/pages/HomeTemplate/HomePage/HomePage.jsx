@@ -161,30 +161,30 @@ class HomePage extends Component {
             }
 
         })
-        // filmApi
-        //     .then((res) => {
-        //         this.setState({
-        //             ...this.state,
-        //             film: {
-        //                 ...this.state.film,
-        //                 loading: false,
-        //                 data: res.data.content,
+        filmApi
+            .then((res) => {
+                this.setState({
+                    ...this.state,
+                    film: {
+                        ...this.state.film,
+                        loading: false,
+                        data: res.data.content,
 
-        //             }
-        //         })
-        //     })
-        //     .catch((error) => {
-        //         this.setState({
-        //             ...this.state,
-        //             film: {
-        //                 ...this.state.film,
-        //                 loading: true,
-        //                 data: null,
-        //                 error: error
-        //             }
+                    }
+                })
+            })
+            .catch((error) => {
+                this.setState({
+                    ...this.state,
+                    film: {
+                        ...this.state.film,
+                        loading: true,
+                        data: null,
+                        error: error
+                    }
 
-        //         })
-        //     })
+                })
+            })
         // apiTheater
         //     .then((res) => {
         //         console.log(`in then apiTheater: ${res}`);
