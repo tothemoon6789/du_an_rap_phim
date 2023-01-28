@@ -15,9 +15,9 @@ class AdminTemplate extends Component {
                         </div>
                         <ul className='list-group'>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='admin'>Trang chủ</NavLink>
+                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to=''>Trang chủ</NavLink>
                             </li>
-                            <li className='list-item p-2'>
+                            {/* <li className='list-item p-2'>
                                 <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='manage-user'>Quản trị người dùng</NavLink>
                             </li>
                             <li className='list-item p-2'>
@@ -31,7 +31,8 @@ class AdminTemplate extends Component {
                             </li>
                             <li className='list-item p-2'>
                                 <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='add-new-user'>Thêm người dùng</NavLink>
-                            </li>
+                            </li> */}
+                            
                         </ul>
                     </div>
                     <div className='w-75' style={{marginLeft:'25%'}}>
