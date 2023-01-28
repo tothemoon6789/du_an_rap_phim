@@ -18,17 +18,17 @@ class CommingSoonPage extends Component {
             ...this.state,
             loading:true,
         })
-    //    filmApi
-    //     .then((res) => {
-    //         this.setState({
-    //             ...this.state,
-    //             loading:false,
-    //             data:res.data.content,
-    //         })
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     })
+       filmApi
+        .then((res) => {
+            this.setState({
+                ...this.state,
+                loading:false,
+                data:res.data.content,
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
     
     render() {

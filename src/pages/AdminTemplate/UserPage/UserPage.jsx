@@ -1,6 +1,5 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React, { Component } from 'react';
-// import { apiUser, apiUserOnPage } from '../../../service/apiUser';
 import UserList from './UserList';
 
 class UserPage extends Component {
@@ -59,47 +58,47 @@ class UserPage extends Component {
                                     ...this.state,
                                     currentPage: 1,
                                 })
-    
+
                             }}
                             className="page-link" href="">1</a></li>
-                        <li className="page-item"><a 
-                        onClick={(event) => {
-                            event.preventDefault()
-                            this.setState({
-                                ...this.state,
-                                currentPage: 2,
-                            })
-
-                        }}
-                        className="page-link" href="">2</a></li>
                         <li className="page-item"><a
-                        onClick={(event) => {
-                            event.preventDefault()
-                            this.setState({
-                                ...this.state,
-                                currentPage: 3,
-                            })
+                            onClick={(event) => {
+                                event.preventDefault()
+                                this.setState({
+                                    ...this.state,
+                                    currentPage: 2,
+                                })
 
-                        }}
-                        className="page-link" href="">3</a></li>
+                            }}
+                            className="page-link" href="">2</a></li>
                         <li className="page-item"><a
-                        onClick={(event) => {
-                            event.preventDefault()
-                            this.setState({
-                                ...this.state,
-                                currentPage: this.state.currentPage + 1,
-                            })
+                            onClick={(event) => {
+                                event.preventDefault()
+                                this.setState({
+                                    ...this.state,
+                                    currentPage: 3,
+                                })
 
-                        }}
-                        className="page-link" href="#">Next</a></li>
+                            }}
+                            className="page-link" href="">3</a></li>
+                        <li className="page-item"><a
+                            onClick={(event) => {
+                                event.preventDefault()
+                                this.setState({
+                                    ...this.state,
+                                    currentPage: this.state.currentPage + 1,
+                                })
+
+                            }}
+                            className="page-link" href="#">Next</a></li>
                     </ul>
                 </nav>
             </div>
 
         );
     }
-    get
-        componentDidMount() {
+
+    componentDidMount() {
         const { currentPage } = this.state
         this.setState({
             ...this.state,
@@ -107,58 +106,70 @@ class UserPage extends Component {
             data: null,
             error: null,
         })
-        // apiUserOnPage
+        axios({
+            url: `https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP05&soTrang=${currentPage}&soPhanTuTrenTrang=20`,
+            method: 'GET',
+            headers: {
+                TokenCybersoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzOSIsIkhldEhhblN0cmluZyI6IjI0LzA3LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY5MDE1NjgwMDAwMCIsIm5iZiI6MTY2MTcwNjAwMCwiZXhwIjoxNjkwMzA0NDAwfQ.v3QBEWqiclIwpSJXtVil8Lu30xYH1J5FT82rQrUyv1c',
+            },
+            timeout: 40000,
+        })
+            .then((res) => {
+                // console.log(res); 
+                this.setState({
+                    ...this.state,
+                    loading: false,
+                    data: res.data.content.items,
+                    error: null,
+                })
+            })
 
-
-        //     .then((res) => {
-        //         // console.log(res); 
-        //         this.setState({
-        //             ...this.state,
-        //             loading: false,
-        //             data: res.data.content.items,
-        //             error: null,
-        //         })
-        //     })
-
-        //     .catch((error) => {
-        //         this.setState({
-        //             ...this.state,
-        //             loading: true,
-        //             data: null,
-        //             error: error,
-        //         })
-        //     })
+            .catch((error) => {
+                this.setState({
+                    ...this.state,
+                    loading: true,
+                    data: null,
+                    error: error,
+                })
+            })
     }
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.currentPage!==this.state.currentPage) {
+        if (prevState.currentPage !== this.state.currentPage) {
             this.setState({
                 ...this.state,
                 loading: true,
             })
-            // apiUser
+            axios({
+                url: `https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP05&soTrang=${this.state.currentPage}&soPhanTuTrenTrang=20`,
+                method: 'GET',
+                headers: {
+                    TokenCybersoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzOSIsIkhldEhhblN0cmluZyI6IjI0LzA3LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY5MDE1NjgwMDAwMCIsIm5iZiI6MTY2MTcwNjAwMCwiZXhwIjoxNjkwMzA0NDAwfQ.v3QBEWqiclIwpSJXtVil8Lu30xYH1J5FT82rQrUyv1c',
+                },
+                timeout: 40000,
+            })
 
-            //     .then((res) => {
-            //         // console.log(res); 
-            //         this.setState({
-            //             ...this.state,
-            //             loading: false,
-            //             data: res.data.content.items,
-            //             error: null,
-            //         })
-            //     })
-            //     .catch((error) => {
-            //         this.setState({
-            //             ...this.state,
-            //             loading: true,
-            //             data: null,
-            //             error: error,
-            //         })
-            //     })
+                .then((res) => {
+                    // console.log(res); 
+                    this.setState({
+                        ...this.state,
+                        loading: false,
+                        data: res.data.content.items,
+                        error: null,
+                    })
+                })
+                .catch((error) => {
+                    this.setState({
+                        ...this.state,
+                        loading: true,
+                        data: null,
+                        error: error,
+                    })
+                })
         }
     }
     renderUserList = () => {
 
-        const { data, currentPage } = this.state
+        const { data } = this.state
         if (data) {
 
 
