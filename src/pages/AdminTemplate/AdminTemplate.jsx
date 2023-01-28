@@ -15,7 +15,7 @@ class AdminTemplate extends Component {
                         </div>
                         <ul className='list-group'>
                             <li className='list-item p-2'>
-                                <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to=''>Trang chủ</NavLink>
+                                <NavLink to='/' className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} >Trang chủ</NavLink>
                             </li>
                             {/* <li className='list-item p-2'>
                                 <NavLink className={({isActive})=> isActive ? 'bg-light text-dark nav-link':'nav-link'} to='manage-user'>Quản trị người dùng</NavLink>
