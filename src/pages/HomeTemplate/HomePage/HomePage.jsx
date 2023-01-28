@@ -185,60 +185,60 @@ class HomePage extends Component {
 
                 })
             })
-        // apiTheater
-        //     .then((res) => {
-        //         console.log(`in then apiTheater: ${res}`);
-        //         this.setState({
-        //             ...this.state,
-        //             theater: {
-        //                 ...this.state.theater,
-        //                 loading: false,
-        //                 data: res.data.content,
+        apiTheater
+            .then((res) => {
+                console.log(`in then apiTheater: ${res}`);
+                this.setState({
+                    ...this.state,
+                    theater: {
+                        ...this.state.theater,
+                        loading: false,
+                        data: res.data.content,
 
-        //             }
-        //         })
-        //     })
-        //     .catch((error) => {
-        //         console.log(`in err apiTheater: ${error}`);
-        //         this.setState({
-        //             ...this.state,
-        //             theater: {
-        //                 ...this.state.theater,
-        //                 loading: true,
-        //                 data: null,
-        //                 error: error
-        //             }
+                    }
+                })
+            })
+            .catch((error) => {
+                console.log(`in err apiTheater: ${error}`);
+                this.setState({
+                    ...this.state,
+                    theater: {
+                        ...this.state.theater,
+                        loading: true,
+                        data: null,
+                        error: error
+                    }
 
-        //         })
-        //     })
-        // apiShowTimeByTheater
-        //     .then((res) => {
-        //         const findIndex = res.data.content.findIndex((theater) => {
-        //             return theater.maHeThongRap === this.state.theaterCode
-        //         })
-        //         if (findIndex !== -1) {
-        //             this.setState({
-        //                 ...this.state,
-        //                 theaterDetail: {
-        //                     ...this.state.theaterDetail,
-        //                     loading: false,
-        //                     data: res.data.content[findIndex].lstCumRap,
-        //                 }
+                })
+            })
+        apiShowTimeByTheater
+            .then((res) => {
+                const findIndex = res.data.content.findIndex((theater) => {
+                    return theater.maHeThongRap === this.state.theaterCode
+                })
+                if (findIndex !== -1) {
+                    this.setState({
+                        ...this.state,
+                        theaterDetail: {
+                            ...this.state.theaterDetail,
+                            loading: false,
+                            data: res.data.content[findIndex].lstCumRap,
+                        }
 
-        //             })
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         this.setState({
-        //             ...this.state,
-        //             theaterDetail: {
-        //                 ...this.state.theaterDetail,
-        //                 loading: true,
-        //                 error: error,
-        //             }
+                    })
+                }
+            })
+            .catch((error) => {
+                this.setState({
+                    ...this.state,
+                    theaterDetail: {
+                        ...this.state.theaterDetail,
+                        loading: true,
+                        error: error,
+                    }
 
-        //         })
-        //     })
+                })
+            })
         
     }
     componentDidUpdate(prevProps, prevState) {
