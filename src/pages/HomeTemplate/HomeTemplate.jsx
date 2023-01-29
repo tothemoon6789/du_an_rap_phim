@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { connect } from 'react-redux';
 // import axios from 'axios';
-import { changeDarkThemeAction } from '../../store/reducer/config/action';
 import { parseJSON } from 'jquery';
+import ButtonNavlink from '../../components/Button/ButtonNavlink';
+import ButtonOutlineNavlink from '../../components/Button/ButtonOutlineNavlink';
+import { connect } from 'react-redux';
+import { LOG_OUT } from '../../store/reducer/user/const';
 class HomeTemplate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
-            data: null,
-            error: null,
-            theme: "lightTheme",
+            theme: "darkTheme",
         }
     }
-   
+
     render() {
         const { theme } = this.state
+        const { accessToken } = this.props
         return (
             <>
-                <div
-                    className={`${theme}`}
-                >
+                <div className={`${theme}`}>
+                    {/* //TODO: navbar */}
                     <div className='container'>
                         <nav className="navbar navbar-expand-md">
-                            <NavLink className="navbar-brand " to=""><i className="fa-solid fa-film" style={{ fontSize: "50px" }}></i><h1 className='ml-2 d-inline-block'>CINIMA</h1></NavLink>
+                            <NavLink className="navbar-brand " to=""><i className="fa-solid fa-film" style={{ fontSize: "50px" }}></i><h1 className='ml-2 d-inline-block'>CINEMA</h1></NavLink>
                             <button
                                 style={{ background: 'rgba(255,255,255,0.2)' }}
                                 className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,11 +32,11 @@ class HomeTemplate extends Component {
                             <div className="collapse navbar-collapse" id="collapsibleNavId">
                                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                     <li className="nav-item active ml-3">
-                                        <NavLink to="" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Home</NavLink>
+                                        <NavLink to="" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Trang chủ</NavLink>
                                     </li>
-                                    <li className="nav-item ml-3">
+                                    {/* <li className="nav-item ml-3">
                                         <NavLink to="/detail" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Detail</NavLink>
-                                    </li>
+                                    </li> */}
                                     <li className="nav-item ml-3">
                                         <NavLink to="/booking" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Booking</NavLink>
                                     </li>
@@ -51,22 +50,24 @@ class HomeTemplate extends Component {
                                 <button
                                     onClick={this.handleDarkTheme}>
                                     <i className="fa-solid fa-sun" ></i>
-
                                 </button>
-                                <button className='btn btn-default'><NavLink to="/sign-in">Đăng ký</NavLink></button>
+                                {accessToken === '' ?
+                                    <div>
 
-                                <button
-                                    style={{
-                                        background: 'rgba(255,255,255,0.2)',
+                                        <ButtonOutlineNavlink theme={theme} navlinkTo='/sign-in' buttonName='Đăng ký' />
+                                        <ButtonNavlink theme={theme} navlinkTo='/login' buttonName='Đăng nhập' />
+                                    </div>
 
-                                    }}
-                                    className='btn btn-default ml-2'>
-                                    <NavLink
-                                        style={
-                                            { color: 'white' }
-                                        }
-                                        to="/login">Đăng nhập</NavLink>
-                                </button>
+                                    :
+                                    <div>
+
+                                        <NavLink to='/user'> <img className='rounded-circle img-fluid ml-2' src="./images/img_avatar.png" width='50px' height='50px' alt="..." /></NavLink>
+                                        <button onClick={() => {
+                                            this.props.logOut()
+                                            window.alert('Đăng xuất thành công!')
+                                        }} className='btn btn-danger ml-2' >Đăng xuất</button>
+                                    </div>
+                                }
                             </div>
                         </nav>
                     </div>
@@ -138,8 +139,8 @@ class HomeTemplate extends Component {
         );
     }
     componentDidMount() {
-         // todo cap nhat loading
-         this.setState({
+        // todo cap nhat loading
+        this.setState({
             ...this.state,
             loading: true,
         })
@@ -149,41 +150,15 @@ class HomeTemplate extends Component {
         if (movie) {
             this.setState({
                 ...this.state,
-                theme:movie.theme,
+                theme: movie.theme,
             })
         }
-       
-        // axios({
-        //     method: 'GET',
-        //     url: 'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01',
-        //     headers: {
-        //         TokenCybersoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzOSIsIkhldEhhblN0cmluZyI6IjI0LzA3LzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY5MDE1NjgwMDAwMCIsIm5iZiI6MTY2MTcwNjAwMCwiZXhwIjoxNjkwMzA0NDAwfQ.v3QBEWqiclIwpSJXtVil8Lu30xYH1J5FT82rQrUyv1c'
-        //     }
-        // })
-        //     .then((res) => {
-        //         this.setState({
-        //             ...this.state,
-        //             loading: false,
-        //             data: res,
-        //             error: null
-        //         })
-        //     })
-        //     .catch((error) => {
-        //         this.setState({
-        //             ...this.state,
-        //             loading: false,
-        //             data: null,
-        //             error: error,
-        //         })
-        //     })
-
-
     }
-    componentDidUpdate (prevProps,prevState){
-        if(prevState.theme !== this.state.theme){
-            const myTheme = {theme:this.state.theme}
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.theme !== this.state.theme) {
+            const myTheme = { theme: this.state.theme }
             const myJson = JSON.stringify(myTheme)
-            localStorage.setItem("movie",myJson)
+            localStorage.setItem("movie", myJson)
         }
     }
     handleDarkTheme = () => {
@@ -200,21 +175,23 @@ class HomeTemplate extends Component {
             })
         }
     }
+
 }
-
-
 const mapStateToProp = (state) => {
     return {
-        store: state,
-        darkTheme: state.configReducer.darkTheme,
+        accessToken: state.userReducer.accessToken,
     }
 }
 const mapDispatchToProp = (dispatch) => {
     return {
-        changeDarkTheme: (boolean) => {
+        logOut: () => {
+            const action = {
+                type: LOG_OUT,
 
-            dispatch(changeDarkThemeAction(boolean))
+            }
+            dispatch(action)
         }
     }
 }
+
 export default connect(mapStateToProp, mapDispatchToProp)(HomeTemplate);

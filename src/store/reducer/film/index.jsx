@@ -1,9 +1,15 @@
-const initListFilm = [
-    {name:'jjj',id:'dhhjd'},
-    {name:'jjj',id:'dhhjd'},
-    {name:'jjj',id:'dhhjd'},
-]
-const filmReducer = (state=initListFilm,action) => {
-    return {...state}
+const initFilm = {
+filmClicked:{},
+}
+const filmReducer = (state=initFilm,action) => {
+    switch (action.type) {
+        case 'FILM_CLICKED':
+            return {...state,
+            filmClicked: action.payload
+            }
+    
+        default:
+            return {...state}
+    }
 }
 export default filmReducer

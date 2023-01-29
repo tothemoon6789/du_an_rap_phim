@@ -37,7 +37,9 @@ function App() {
           <Route path='booking' element={<BookingPage />}></Route>
           <Route path='showing' element={<ShowingPage />}></Route>
           <Route path='comming-soon' element={<CommingSoonPage />}></Route>
-          <Route path='login' element={<LoginPage />}></Route>
+          <Route path='login' element={<LoginPage />}>
+            {/* <Route path='user' element={<UserTemplate/>} ></Route> */}
+          </Route>
           <Route path='sign-in' element={<SingIngPage />}></Route>
           <Route path='*' element={<HomePage />}></Route>
 

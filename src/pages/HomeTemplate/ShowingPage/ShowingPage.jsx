@@ -27,7 +27,7 @@ class ShowingPage extends Component {
                     ...this.state,
                     loading: false,
                     data: res.data.content,
-                })
+                }, () => console.log(this.state))
             })
             .catch((error) => {
                 console.log(error);

@@ -106,9 +106,12 @@ class HomePage extends Component {
                     {/* //TODO: END CHỌN PHIM _ RẠP _ GIỜ CHIẾU */}
                     {/* //TODO: DANH SACH PHIM */}
                     <div className='container text-dark'>
-                        <div className='row'>
                             {/* loading ripple */}
-                            {film.loading ? <div className="lds-ripple"><div></div><div></div></div> : ''}
+                            <div className='d-flex justify-content-center'>
+                            {film.loading ? <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> : ''}
+                            </div>
+                        <div className='row'>
+
                             {this.renderShowingFilm()}
                         </div>
                     </div>
@@ -118,17 +121,20 @@ class HomePage extends Component {
                     <div className="container mt-2">
                         <div className='row'>
                             <div className='col-md-2 p-sm-0 p-md-5' >
-                                <div className="row">
                                     {/* loading ripple */}
-                                    {theater.loading ? <div className="lds-ripple"><div></div><div></div></div> : ''}
+                                    {theater.loading ? <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> : ''}
+                                <div className="row">
                                     {this.renderTheater()}
                                 </div>
                             </div>
                             <div className='col-md-10'>
-                                <div className="row">
-                                    <div className='col-md-4 border'>
+                                <div className="d-flex justify-content-center">
+
                                         {/* loading ripple */}
-                                        {theaterDetail.loading ? <div className="lds-ripple"><div></div><div></div></div> : ''}
+                                        {theaterDetail.loading ? <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> : ''}
+                                </div>
+                                <div className="row">
+                                    <div className='col-md-4'>
                                         {this.renderTheaterDetail()}
 
 
@@ -308,36 +314,7 @@ class HomePage extends Component {
                     })
                 })
         }
-        // ! the second time in componentdidupdate
-        // if (this.state.film.error === 'erro') {
-        //     console.log("THE SECOND TIME IN FILM");
-        //     filmApi
-        //     .then((res) => {
-        //         this.setState({
-        //             ...this.state,
-        //             film: {
-        //                 ...this.state.film,
-        //                 loading: false,
-        //                 data: res.data.content,
-
-        //             }
-        //         })
-        //     })
-        //     .catch((error) => {
-        //         console.log('THE SECONTIME IN FILM IN CATCH');
-        //         console.log(error);
-        //         this.setState({
-        //             ...this.state,
-        //             film: {
-        //                 ...this.state.film,
-        //                 loading: true,
-        //                 data: null,
-        //                 error: "error",
-        //             }
-
-        //         })
-        //     })
-        // }
+       
         console.log(this.state);
     }
     renderShowingFilm = () => {

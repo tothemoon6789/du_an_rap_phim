@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import { Outlet } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { apiUserInfo } from '../../service/apiUserInfo';
+import { ADD_USER_INFORMATION } from '../../store/reducer/user/const';
 
 class UserTemplate extends Component {
     render() {
+        const {userInfo} = this.props
         return (
             <>
                 <div className="container">
+                  
                     <div className="shadow pb-3">
 
                         <div className=' bg-danger rounded-top position-relative' style={{ height: '25vh', background: 'linear-gradient(to left, red,yellow)' }}>
-                            <img className='rounded-circle position-absolute' style={{ bottom: 0, left: '50px', transform: 'translateY(50%)', zIndex: '1', border: '5px solid white' }} src="https://i.pravatar.cc/" width={130} height={130} alt="..." />
+                            <img className='rounded-circle position-absolute' style={{ bottom: 0, left: '50px', transform: 'translateY(50%)', zIndex: '1', border: '5px solid white' }} src="./images/img_avatar.png" width={130} height={130} alt="..." />
                         </div>
                         <div className='px-5' style={{ marginTop: '70px' }}>
                             {/* <img className='rounded-circle' style={{ border: '5px solid white' }} src="https://i.pravatar.cc//" width={130} height={130} alt="" /> */}
-                            <h3 className='mt-2'>Linh Pham</h3>
-                            <span className='d-block'><i class="fa-solid fa-location-pin mr-2"></i>403 Điện biên phủ, Bình Thạnh, TP Hồ Chí Minh</span>
-                            <span className='d-block'>Điểm số: 120</span>
+                            <h3 className='mt-2'>{userInfo.hoTen}</h3>
+                            <span className='d-block'>Số điện thoại: {userInfo.soDT}</span>
+                            <span className='d-block'>Email: {userInfo.email}</span>
                             <div className="p-3">
 
-                                <button type="button" class="btn btn-default border">Chỉnh sửa</button>
-                                <button type="button" class="btn btn-primary ml-2">Mua vé  <i class="fa-solid fa-ticket"></i></button>
+                                <button type="button" className="btn btn-default border">Chỉnh sửa</button>
+                                <button type="button" className="btn btn-primary ml-2">Mua vé  <i className="fa-solid fa-ticket"></i></button>
                             </div>
                         </div>
                     </div>
@@ -127,6 +131,34 @@ class UserTemplate extends Component {
             </>
         );
     }
-}
+    componentDidMount () {
+        apiUserInfo(this.props.accessToken)
+        .then((res) => {
+            console.log(res); 
+            this.props.addUserInfomation(res.data.content)
+        }) 
+        .catch((error) => {
+            console.log(error); 
+        })
 
-export default UserTemplate;
+    }
+ 
+}
+const mapStateToProp = (state) => {
+    return {
+        accessToken: state.userReducer.accessToken,
+        userInfo: state.userReducer.userInfo,
+    }
+}
+const mapDispatchToProp = (dispatch) => {
+    return {
+        addUserInfomation : (userInfo) => {
+            const action = {
+                type: ADD_USER_INFORMATION,
+                payload: userInfo
+            }
+            dispatch(action)
+        }
+    }
+}
+export default connect(mapStateToProp,mapDispatchToProp) (UserTemplate);
