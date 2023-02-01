@@ -8,6 +8,7 @@ class UserList extends Component {
                 <tr>
                         <td>1</td>
                         <td>{user.taiKhoan}</td>
+                        <td>{user.maLoaiNguoiDung}</td>
                         <td>{user.matKhau}</td>
                         <td>{user.hoTen}</td>
                         <td>{user.email}</td>

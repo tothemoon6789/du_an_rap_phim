@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, Link } from 'react-router-dom';
 // import axios from 'axios';
 import { parseJSON } from 'jquery';
 import ButtonNavlink from '../../components/Button/ButtonNavlink';
@@ -22,6 +22,7 @@ class HomeTemplate extends Component {
                 <div className={`${theme}`}>
                     {/* //TODO: navbar */}
                     <div className='container'>
+                        <Link to='/admin'>ADMIN</Link>
                         <nav className="navbar navbar-expand-md">
                             <NavLink className="navbar-brand " to=""><i className="fa-solid fa-film" style={{ fontSize: "50px" }}></i><h1 className='ml-2 d-inline-block'>CINEMA</h1></NavLink>
                             <button
@@ -175,6 +176,7 @@ class HomeTemplate extends Component {
             })
         }
     }
+    
 
 }
 const mapStateToProp = (state) => {

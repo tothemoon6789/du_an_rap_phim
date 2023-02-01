@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { apiUserInfo } from '../../service/apiUserInfo';
 import { ADD_USER_INFORMATION } from '../../store/reducer/user/const';
+import LoginPage from '../HomeTemplate/LoginPage/LoginPage';
 
-class UserTemplate extends Component {
-    render() {
-        const {userInfo} = this.props
-        return (
+const UserTemplate = (props) => {
+        useEffect(() => {
+            apiUserInfo(props.accessToken)
+            .then((res) => {
+                console.log(res); 
+                props.addUserInfomation(res.data.content)
+            }) 
+            .catch((error) => {
+                console.log(error); 
+            })
+        },[])
+        const {userInfo, accessToken} = props
+        console.log(userInfo);
+        return accessToken ==='' ?
+        <LoginPage/>:
+        (
             <>
                 <div className="container">
                   
@@ -20,6 +35,7 @@ class UserTemplate extends Component {
                             <h3 className='mt-2'>{userInfo.hoTen}</h3>
                             <span className='d-block'>Số điện thoại: {userInfo.soDT}</span>
                             <span className='d-block'>Email: {userInfo.email}</span>
+                            <Link to='/admin'>ADMIN</Link>
                             <div className="p-3">
 
                                 <button type="button" className="btn btn-default border">Chỉnh sửa</button>
@@ -130,18 +146,8 @@ class UserTemplate extends Component {
                 </div>
             </>
         );
-    }
-    componentDidMount () {
-        apiUserInfo(this.props.accessToken)
-        .then((res) => {
-            console.log(res); 
-            this.props.addUserInfomation(res.data.content)
-        }) 
-        .catch((error) => {
-            console.log(error); 
-        })
-
-    }
+    
+   
  
 }
 const mapStateToProp = (state) => {

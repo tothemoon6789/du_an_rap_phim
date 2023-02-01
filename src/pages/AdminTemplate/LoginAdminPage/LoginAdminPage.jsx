@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { apiLogin } from '../../../service/apiLogin';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-const LoginPage = (props) => {
+const LoginAdminPage = (props) => {
     const navigate = useNavigate();
     const [login, setLogin] = useState({
         taiKhoan: '',
@@ -14,8 +14,8 @@ const LoginPage = (props) => {
         accessToken: '',
     })
     useEffect(() => {
-        console.log(login);
-    }, [login])
+        console.log(props);
+    }, [props])
     const handleOnchange = (e) => {
         const { name, value } = e.target
         setLogin({
@@ -24,6 +24,7 @@ const LoginPage = (props) => {
         })
 
     }
+   
     const handelLogin = () => {
         const { taiKhoan, matKhau } = login
 
@@ -49,15 +50,15 @@ const LoginPage = (props) => {
                         ...login,
                         spiner: false,
                     })
-                    if (res.data.content.accessToken &&  res.data.content.maLoaiNguoiDung === 'KhachHang') {
-                        props.addAccessToken(res.data.content.accessToken)
-                        props.addUserInfomation(res.data.content)
+                    if (res.data.content.accessToken && res.data.content.maLoaiNguoiDung==='QuanTri') {
+                        props.adminLogin(res.data.content)
                         window.alert('Đăng nhập thành công!')
-                        navigate('/user')
+
+                        navigate('/admin')
                     } else {
-                        alert('Không tồn tại tài khoản này!')
+                        window.alert('Không tồn tại tài khoản admin này!')
+                        
                     }
-                   
                 })
                 .catch((error) => {
                     console.log(error);
@@ -99,8 +100,8 @@ const LoginPage = (props) => {
             >
                 <div className='row justify-content-center '>
                     <div className="col-md-4 mt-5 border rounded py-5 mb-5 shadow">
-                        <img src="./images/user_login.png" alt="..." className='img-thumbnail rounded-circle'/>
-                        <h1 className='mb-4 text-center'>Đăng nhập</h1>
+                        <img src="./images/login_header.png" alt="..."  className='img-fluid'/>
+                        <h1 className='mb-4'>Đăng nhập</h1>
                         <input onChange={handleOnchange} name='taiKhoan' className='form-control mt-2' type='text' placeholder='Tài khoản' />
                         <input onChange={handleOnchange} name='matKhau' className='form-control mt-2' type='password' placeholder='Mật khẩu' />
                         <div className='text-danger'>{login.fullFilled}</div>
@@ -110,7 +111,6 @@ const LoginPage = (props) => {
                                 console.log(props);
                             }}
                             className='btn btn-block btn-primary mt-4'>Đăng nhập</button>
-                           <div className='text-center mt-2'><span>Bạn không có tài khoản ? </span><Link to='/sign-in'>Đăng ký</Link></div>
                         {login.spiner ?
                             <div className="d-flex justify-content-center">
                                 <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
@@ -126,28 +126,20 @@ const LoginPage = (props) => {
 };
 const mapStateToProp = (state) => {
     return {
-        accessToken: state.userReducer.accessToken,
-        userInfo: state.userReducer.userInfo
+        accessToken: state.adminReducer.accessToken,
+        adminInfo: state.adminReducer.adminInfo,
     }
 }
 const mapDispatchToProp = (dispatch) => {
     return {
-        addAccessToken: (token) => {
+        adminLogin: (info) => {
             const action = {
-                type: 'ADD_USER_ACCESS_TOKEN',
-                payload: token,
-            }
-            dispatch(action)
-        }, 
-        addUserInfomation : (userInfo) => {
-            const action = {
-                type: 'ADD_USER_INFORMATION',
-                payload: userInfo
+                type: 'ADMIN_LOGIN',
+                payload: info,
             }
             dispatch(action)
         }
-      
     }
 }
 
-export default connect(mapStateToProp, mapDispatchToProp)(LoginPage);
+export default connect(mapStateToProp, mapDispatchToProp)(LoginAdminPage);

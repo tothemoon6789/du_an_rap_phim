@@ -26,6 +26,7 @@ class UserPage extends Component {
                         <tr>
                             <th>STT</th>
                             <th>Tài khoản</th>
+                            <th>Phân loại</th>
                             <th>Mật khẩu</th>
                             <th>Họ tên</th>
                             <th>Email</th>
@@ -121,7 +122,7 @@ class UserPage extends Component {
                     loading: false,
                     data: res.data.content.items,
                     error: null,
-                })
+                }, () => console.log(this.state))
             })
 
             .catch((error) => {

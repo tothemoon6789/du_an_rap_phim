@@ -1,41 +1,89 @@
-import React, { Component } from 'react';
 
-class ManageFilmPage extends Component {
-    render() {
-        return (
-            <div className='container'>
-                <h1>Quản lý phim</h1>
-                <button className='btn btn-primary'>Thêm mới</button>
-                <div className="form-group mt-2">
-                    <input type="text" className="form-control" placeholder='Nhập tên phim' />
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Mã phim</th>
-                            <th>Hình ảnh</th>
-                            <th>Tên phim</th>
-                            <th>Mô tả</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>123</td>
-                            <td><img src="https://i.pravatar.cc" width={50} height={50} alt="..." /></td>
-                            <td>Tam quốc chí</td>
-                            <td>Tam quốc chí là bộ phim đặc sắc, abc gì đó</td>
-                            <td><button className='btn btn-default'><i class="fa-solid fa-pen-to-square"></i></button><button className='btn btn-default'><i className="fa-solid fa-trash text-danger"></i></button></td>
-                        </tr>
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { connect } from 'react-redux';
+import { apiListFilm } from '../../../service/apiAdmin';
+import FilmItem from './FilmItem';
 
-                       
+const ManageFilmPage = (props) => {
+    useEffect(() => {
+        apiListFilm
+        .then((res) => {
+            props.addListFilm(res.data.content);
+        })
+        .catch((error) => {
+            console.log(error); 
+        })
+    },[])
+    useEffect(() => {
+        console.log(props.searchKey);
+    },[props.searchKey])
+    const renderListFilm = () => {
+        if (props.listSearchFilm.length) {
+            return props.listSearchFilm.map((film, index) => {
+                return <FilmItem key= {index} filmItem = {film}/>
+            })
+        }
 
-                    </tbody>
-                </table>
-
+    }
+    return (
+        <div className='container'>
+            <h1>Quản lý phim</h1>
+            <button className='btn btn-primary'>Thêm mới</button>
+            <div className="form-group mt-2">
+                <input
+                onChange={(e) => {
+                    props.addSearhKey(e.target.value)
+                }}
+                type="text" className="form-control" placeholder='Nhập tên phim' />
             </div>
-        );
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Mã phim</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên phim</th>
+                        <th>Mô tả</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+
+                   {renderListFilm()}
+
+                </tbody>
+            </table>
+
+        </div>
+    );
+   
+};
+const mapStateToProp = (state) => {
+    return {
+        listFilm : state.filmReducer.listFilm,
+        searchKey : state.filmReducer.searchKey,
+        listSearchFilm : state.filmReducer.listSearchFilm,
+    }
+}
+const mapDispatchToProp = (dispatch) => {
+    return {
+        addListFilm : (listFilm) => {
+            const action = {
+                type: 'ADD_LIST_FILM',
+                payload: listFilm
+            } 
+            dispatch(action)
+        },
+        addSearhKey : (searchKey) => {
+            const action = {
+                type: 'SEARCH_FILM',
+                payload: searchKey
+            } 
+            dispatch(action)
+        }
     }
 }
 
-export default ManageFilmPage;
+export default connect(mapStateToProp, mapDispatchToProp) (ManageFilmPage);

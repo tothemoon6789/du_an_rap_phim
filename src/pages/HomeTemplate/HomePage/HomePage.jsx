@@ -317,6 +317,10 @@ class HomePage extends Component {
        
         console.log(this.state);
     }
+    componentWillUnmount(){
+        console.log('Clear time out');
+        clearInterval(this.timerFilms)
+    }
     renderShowingFilm = () => {
         const { film } = this.state
         if (film.data) {
