@@ -52,6 +52,7 @@ function App() {
           <Route path='addnew' element={<AddNewPage />}></Route>
           <Route path='show-time' element={<ShowTimesPage />}></Route>
           <Route path='add-new-user' element={<AddNewUserPage />}></Route>
+
         </Route>
         <Route path='user'>
           <Route index element={<UserTemplate />}></Route>

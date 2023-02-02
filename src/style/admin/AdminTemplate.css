@@ -1,0 +1,44 @@
+.admin-left-navbar {
+
+}
+/* TODO: for tablet */
+@media only screen and (min-width:768px) {
+    .admin-left-navbar {
+        background-color: red;
+        width: 25%;
+    }
+    .admin-right-content{
+        background-color: blue;
+        margin-left: 25%;
+        width: 100%;
+    }
+    .btn-open-navbar {
+        display: none;
+    }
+    .btn-close {
+        position: absolute;
+        right: 0;
+    }
+}
+@media only screen and (max-width:768px){
+    .admin-left-navbar {
+        position: relative;
+        background-color: yellow;
+        width: 25%;
+        transform: translateX(-100%);
+    }
+    .admin-right-content {
+        background-color: aqua;
+    }
+    .btn-open-navbar {
+        display: inline-block;
+        position: absolute;
+        left: 10%;
+        top: 10%;
+    }
+    .btn-close {
+        position: absolute;
+        right: 0;
+    }
+    
+}

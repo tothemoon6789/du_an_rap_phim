@@ -100,7 +100,7 @@ const LoginAdminPage = (props) => {
             >
                 <div className='row justify-content-center '>
                     <div className="col-md-4 mt-5 border rounded py-5 mb-5 shadow">
-                        <img src="./images/login_header.png" alt="..."  className='img-fluid'/>
+                        <img src="https://www.callcentrehelper.com/images/stories/2020/10/data-analysis-charts-760.png" alt="..."  className='img-fluid'/>
                         <h1 className='mb-4'>Đăng nhập</h1>
                         <input onChange={handleOnchange} name='taiKhoan' className='form-control mt-2' type='text' placeholder='Tài khoản' />
                         <input onChange={handleOnchange} name='matKhau' className='form-control mt-2' type='password' placeholder='Mật khẩu' />

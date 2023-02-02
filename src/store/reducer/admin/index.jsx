@@ -1,6 +1,7 @@
 const initAdmin = {
     accessToken:'',
-    adminInfo: {}
+    adminInfo: {},
+    adminInfoSearch: {},
 }
 
 const adminReducer = (state=initAdmin,action) => {
@@ -12,7 +13,13 @@ const adminReducer = (state=initAdmin,action) => {
                 accessToken: action.payload.accessToken,
                 adminInfo: action.payload,
             }
-    
+        case 'SEARCH_USER':
+            console.log(action.payload);
+            const cloneData = {...state.adminInfo}
+            console.log(cloneData);
+            return {
+                ...state,
+            }
         default:
             return {
                 ...state

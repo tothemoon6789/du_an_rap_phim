@@ -35,9 +35,6 @@ class HomeTemplate extends Component {
                                     <li className="nav-item active ml-3">
                                         <NavLink to="" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Trang chủ</NavLink>
                                     </li>
-                                    {/* <li className="nav-item ml-3">
-                                        <NavLink to="/detail" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Detail</NavLink>
-                                    </li> */}
                                     <li className="nav-item ml-3">
                                         <NavLink to="/booking" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Booking</NavLink>
                                     </li>
