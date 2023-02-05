@@ -43,15 +43,12 @@ const DetailPage = (props) => {
             })
     }, [])
     useEffect(() => {
-        console.log(theaterDetail);
     }, [theaterDetail])
     const handleOnclickCumRap = (cumrap) => {
         setTheaterDetail(cumrap)
-        console.log(cumrap);
     }
     const renderTheater = () => {
         if (theater.data) {
-            console.log('inside theater');
             return theater.data.map((theater, index) => {
                 return (
                     <div key={index} className="col-2 col-md-12 p-0">
@@ -62,7 +59,6 @@ const DetailPage = (props) => {
         }
     }
     const renderTheaterDetail = () => {
-        console.log(theaterDetail);
         if (theaterDetail.length > 0) {
 
             return theaterDetail.map((item, index) => {

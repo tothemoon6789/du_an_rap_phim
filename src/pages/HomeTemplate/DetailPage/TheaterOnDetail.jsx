@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 const TheaterOnDetail = (props) => {
     const { theater, handleOnclickCumRap } = props
-    console.log(theater);
     useEffect(() => {
        handleOnclickCumRap(theater.cumRapChieu) 
     },[])

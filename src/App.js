@@ -23,12 +23,9 @@ import AddNewUserPage from './pages/AdminTemplate/AddNewUserPage/AddNewUserPage'
 
 // ! User
 import UserTemplate from './pages/UserTemplate/UserTemplate';
-
-// import renderRoute from './routes';
-// import { Suspense } from 'react';
-
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path='' element={<HomeTemplate />}>
@@ -37,16 +34,12 @@ function App() {
           <Route path='booking' element={<BookingPage />}></Route>
           <Route path='showing' element={<ShowingPage />}></Route>
           <Route path='comming-soon' element={<CommingSoonPage />}></Route>
-          <Route path='login' element={<LoginPage />}>
-            {/* <Route path='user' element={<UserTemplate/>} ></Route> */}
-          </Route>
+          <Route path='login' element={<LoginPage />}></Route>
           <Route path='sign-in' element={<SingIngPage />}></Route>
           <Route path='*' element={<HomePage />}></Route>
 
         </Route>
         <Route path='admin'  element={<AdminTemplate />}>
-
-          {/* <Route path=''   element={<DashboardPage />}></Route> */}
           <Route index  element={<ManageFilmPage />}></Route>
           <Route path='manage-user' exact element={<UserPage />}></Route>
           <Route path='addnew' exact element={<AddNewPage />}></Route>
@@ -57,20 +50,8 @@ function App() {
         <Route path='user'>
           <Route index element={<UserTemplate />}></Route>
         </Route>
-       
-       {/* {this.renderRoute()} */}
       </Routes>
-
     </BrowserRouter>
-
-    
-    // <BrowserRouter>
-    // <Suspense fallback={<div className='d-flex justify-content-center'><div className='loader'></div></div>}>
-    //   <Routes>
-    // {renderRoute()}
-    //   </Routes>
-    // </Suspense>
-    // </BrowserRouter>
   );
 }
 

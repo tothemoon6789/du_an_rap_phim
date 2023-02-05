@@ -113,7 +113,6 @@ const AddNewUserPage = () => {
         })
     }
     const handelOnSubmit = (event) => {
-        // console.log('handleOnsubmit');
         event.preventDefault()
         const { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = valid
         
@@ -137,7 +136,6 @@ const AddNewUserPage = () => {
           
             apiSingIn(data)
                 .then((res) => {
-                    // console.log(res);
                     setOnPage({
                         ...onPage,
                         spiner: false,
@@ -146,7 +144,6 @@ const AddNewUserPage = () => {
                     alert('Đăng ký thành công!')
                 })
                 .catch((error) => {
-                    // console.log(error);
                     setOnPage({
                         ...onPage,
                         spiner: true,

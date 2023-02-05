@@ -9,7 +9,6 @@ class TheaterDetail extends Component {
             onClick={() => {
                 scroll()
                 handelTheaterDetailOnClick(theaterDetail)
-                console.log(theaterDetail);
             }}
             
             className='d-flex p-2'>

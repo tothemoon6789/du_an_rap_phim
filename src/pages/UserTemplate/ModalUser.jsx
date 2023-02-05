@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { apiUpdateUser, apiUserAccount, apiUserInfo } from '../../service/apiUserInfo';
+import { apiUpdateUser, apiUserAccount, apiUserInfo } from '../../service/apiUser';
 
 
 const ModalUser = (props) => {
@@ -46,7 +46,6 @@ const ModalUser = (props) => {
     useEffect(() => {
         apiUserAccount(userInfo.taiKhoan)
             .then((res) => {
-                console.log(res);
                 const info = res.data.content;
 
                 setState({
@@ -73,7 +72,6 @@ const ModalUser = (props) => {
 
             })
             .catch((error) => {
-                console.log(error);
             })
 
     }, [])
@@ -157,10 +155,7 @@ const ModalUser = (props) => {
     }
     const handelOnSubmit = (event) => {
         event.preventDefault()
-        // console.log(state.singIn);
-        // return
         const { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = state
-        console.log(taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid);
         if (taiKhoanValid && matKhauValid && emailValid && soDtValid && hoTenValid && nhapLaiMatKhauValid) {
             setState({
                 ...state,
@@ -178,11 +173,8 @@ const ModalUser = (props) => {
                 hoTen,
                 maLoaiNguoiDung,
             }
-            // console.log(data);
-            // return
             apiUpdateUser(data)
                 .then((res) => {
-                    console.log(res);
                     
                     refModal.current.click()
                     addUserInfomation(res.data.content)
@@ -193,11 +185,9 @@ const ModalUser = (props) => {
                     window.alert('Cập nhật thành công!')
                     apiUserInfo(props.accessToken)
                     .then((res) => {
-                        console.log(res);
                         props.addUserInfomation(res.data.content)
                     })
                     .catch((error) => {
-                        console.log(error);
                     })
 
                 })

@@ -5,10 +5,6 @@ import { useEffect } from 'react';
 const Seat = (props) => {
     const [seat, setSeat] = useState({})
     const [chose,setChose] = useState(false)
-    // console.log(props.seat);
-    // const {handleOnclickSeat} = props
-    // const { seat } = props
-    // console.log(props);
     useEffect(() => {
         setSeat(props.seat)
     }, [])

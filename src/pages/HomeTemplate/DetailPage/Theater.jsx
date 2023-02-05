@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const Theater = (props) => {
     const {theater}= props
-    console.log(theater);
     return (
         <>
             <div className='d-flex'>
@@ -22,7 +21,6 @@ const Theater = (props) => {
                 <div className='ml-2'>
                     {theater.lichChieuPhim?.map((item) => {
                         return <Link onClick={() => {
-                            console.log(item);
                             props.booking(item)
                         }} 
                         to='/booking'

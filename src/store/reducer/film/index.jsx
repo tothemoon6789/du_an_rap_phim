@@ -28,7 +28,6 @@ const filmReducer = (state = initFilm, action) => {
                 listSearchFilm: filmFilter,
             }
         case 'BOOKING':
-            console.log(action.payload);
             return {
                 ...state,
                 booking: action.payload,

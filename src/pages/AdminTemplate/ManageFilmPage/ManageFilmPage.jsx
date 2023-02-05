@@ -13,11 +13,9 @@ const ManageFilmPage = (props) => {
             props.addListFilm(res.data.content);
         })
         .catch((error) => {
-            // console.log(error); 
         })
     },[])
     useEffect(() => {
-        // console.log(props.searchKey);
     },[props.searchKey])
     const renderListFilm = () => {
         if (props.listSearchFilm.length) {
@@ -30,7 +28,6 @@ const ManageFilmPage = (props) => {
     return (
         <div className='container p-3' style={{marginTop:'50px'}}>
             <h1>Quản lý phim</h1>
-            <button className='btn btn-primary'>Thêm mới</button>
             <div className="form-group mt-2">
                 <input
                 onChange={(e) => {

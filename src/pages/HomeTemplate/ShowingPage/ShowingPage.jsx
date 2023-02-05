@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import Film from '../../../components/Film/Film';
-import { filmApi } from '../../../service/filmApi';
+import { filmApi } from '../../../service/apiHome';
 
 
 class ShowingPage extends Component {
@@ -21,7 +21,6 @@ class ShowingPage extends Component {
             loading: true,
         })
         filmApi
-
             .then((res) => {
                 this.setState({
                     ...this.state,

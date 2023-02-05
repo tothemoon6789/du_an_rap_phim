@@ -22,9 +22,8 @@ class HomeTemplate extends Component {
                 <div className={`${theme}`}>
                     {/* //TODO: navbar */}
                     <div className='container'>
-                        {/* <Link to='/admin'>ADMIN</Link> */}
                         <nav className="navbar navbar-expand-md">
-                            <NavLink className="navbar-brand " to=""><i className="fa-solid fa-film" style={{ fontSize: "50px" }}></i><h1 className='ml-2 d-inline-block'>CINEMA</h1></NavLink>
+                            <NavLink className="navbar-brand animate__animated animate__fadeInLeftBig" to=""><i className="fa-solid fa-film" style={{ fontSize: "50px" }}></i><h1 className='ml-2 d-inline-block'>CINEMA</h1></NavLink>
                             <button
                                 style={{ background: 'rgba(255,255,255,0.2)' }}
                                 className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,16 +31,10 @@ class HomeTemplate extends Component {
                             </button>
                             <div className="collapse navbar-collapse" id="collapsibleNavId">
                                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                                    {/* <li className="nav-item active ml-3">
-                                        <NavLink to="" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Trang chủ</NavLink>
-                                    </li> */}
-                                    {/* <li className="nav-item ml-3">
-                                        <NavLink to="/booking" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Booking</NavLink>
-                                    </li> */}
-                                    <li className="nav-item ml-3">
+                                    <li className="nav-item ml-3 animate__animated animate__fadeIn">
                                         <NavLink to="/showing" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link p-2' : 'nav-link p-2'} >Phim đang chiếu</NavLink>
                                     </li>
-                                    <li className="nav-item ml-3">
+                                    <li className="nav-item ml-3 animate__animated animate__fadeIn">
                                         <NavLink to="/comming-soon" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link p-2' : 'nav-link p-2'} >Phim sắp chiếu</NavLink>
                                     </li>
                                 </ul>
@@ -184,6 +177,7 @@ class HomeTemplate extends Component {
 const mapStateToProp = (state) => {
     return {
         accessToken: state.userReducer.accessToken,
+        allProps: state,
     }
 }
 const mapDispatchToProp = (dispatch) => {

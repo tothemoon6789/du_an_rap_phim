@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import React, { Component } from 'react';
 import Film from '../../../components/Film/Film';
-import { filmApi } from '../../../service/filmApi';
+import { filmApi } from '../../../service/apiHome';
 
 class CommingSoonPage extends Component {
     constructor(props) {

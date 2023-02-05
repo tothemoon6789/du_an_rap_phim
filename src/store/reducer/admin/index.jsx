@@ -19,7 +19,6 @@ const adminReducer = (state = initAdmin, action) => {
                 ...state,
             }
         case 'LOG_OUT':
-            console.log('inside log out');
             window.alert('Đăng xuất thành công!')
             return {
                 ...state,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { apiDeleteUser, apiEditUser } from '../../../service/apiAdmin';
-import { apiLogin } from '../../../service/apiLogin';
+import { apiLogin } from '../../../service/apiHome';
 import UserEdit from './UserEdit';
 
 class UserList extends Component {

@@ -2,7 +2,6 @@ import React from 'react';
 import { apiDeleteFilm } from '../../../service/apiAdmin';
 
 const FilmItem = (props) => {
-    // console.log(props);
     const { filmItem } = props
     return (
         <tr>
@@ -13,13 +12,11 @@ const FilmItem = (props) => {
             <td style={{width:'150px'}}>
                 <button
                 onClick={() => {
-                    console.log(filmItem);
                     apiDeleteFilm(filmItem.maPhim)
                     .then((res) => {
                         window.alert('Xoá thành công!') 
                     })
                     .catch((error) => {
-                        console.log(error); 
                         window.alert('Xoá thất bại!')
                     })
                 }}

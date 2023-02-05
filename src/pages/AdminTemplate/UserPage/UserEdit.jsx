@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { apiEditUser, apiSingIn } from '../../../service/apiAdmin';
 import { useEffect } from 'react';
-import { apiLogin } from '../../../service/apiLogin';
+import { apiLogin } from '../../../service/apiHome';
 
 const UserEdit = (props) => {
     const navigate = useNavigate()
@@ -42,11 +42,7 @@ const UserEdit = (props) => {
         theme: 'darkTheme',
         disable: false,
     })
-    // const [disable,setDisable] = useState(true)
     const { users, handleResetState } = props
-    useEffect(() => {
-        console.log(singIn);
-    }, [singIn])
     useEffect(() => {
         setSingIn({
             // ...users,
@@ -160,7 +156,6 @@ const UserEdit = (props) => {
         event.preventDefault()
         // handleOnError(event)
         const { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = valid
-        // console.log(taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid);
         if (taiKhoanValid && matKhauValid && emailValid && soDtValid && hoTenValid && nhapLaiMatKhauValid) {
             setOnPage({
                 ...onPage,

@@ -2,30 +2,24 @@ import React, { Component } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { apiUserAccount, apiUserInfo} from '../../service/apiUserInfo';
+import { apiUserAccount, apiUserInfo} from '../../service/apiUser';
 import { ADD_USER_INFORMATION } from '../../store/reducer/user/const';
 import LoginPage from '../HomeTemplate/LoginPage/LoginPage';
 import moment from 'moment/moment';
 import UpdateUser from './UpdateUser';
 
 const UserTemplate = (props) => {
-    console.log(props);
     const { thongTinDatVe } = props.userInfo
     useEffect(() => {
         apiUserInfo(props.accessToken)
             .then((res) => {
-                console.log(res);
                 props.addUserInfomation(res.data.content)
             })
             .catch((error) => {
-                console.log(error);
             })
     }, [])
-    console.log(thongTinDatVe);
     const { userInfo, accessToken } = props
     const renderHistoryBooking = () => {
-        console.log(props);
-        console.log(thongTinDatVe);
         if (thongTinDatVe && thongTinDatVe.length > 0) {
             return thongTinDatVe.map((item, index) => {
                 return <div key={index} className='d-flex shadow mt-2'>

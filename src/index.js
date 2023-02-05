@@ -5,9 +5,9 @@ import './style/loading.css'
 import './style/loadingSpiner.css'
 import './style/admin/AdminTemplate.css'
 import './style/booking/seat.css'
+import 'animate.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// eslint-disable-next-line
 import "swiper/css/bundle";
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'

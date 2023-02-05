@@ -12,14 +12,14 @@ const route = [
                 path: '',
                 element: lazy(() => import('../pages/HomeTemplate/HomePage/HomePage')),
             },
-            {
-                path: 'detail',
-                element: lazy(() => import('../pages/HomeTemplate/DetailPage/DetailPage')),
-            },
-            {
-                path: 'booking',
-                element: lazy(() => import('../pages/HomeTemplate/BookingPage/BookingPage')),
-            },
+            // {
+            //     path: 'detail',
+            //     element: lazy(() => import('../pages/HomeTemplate/DetailPage/DetailPage')),
+            // },
+            // {
+            //     path: 'booking',
+            //     element: lazy(() => import('../pages/HomeTemplate/BookingPage/BookingPage')),
+            // },
             {
                 path: 'showing',
                 element : lazy(() => import('../pages/HomeTemplate/ShowingPage/ShowingPage'))

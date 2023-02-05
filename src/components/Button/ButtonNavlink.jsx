@@ -32,7 +32,7 @@ class ButtonNavlink extends Component {
         if (prevProps.theme !== theme) {
             this.setState({
                 theme: theme
-            }, () => console.log(this.state.theme))
+            })
         }
     }
 }

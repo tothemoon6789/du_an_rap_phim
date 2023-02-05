@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { apiAddNewFilm } from '../../../service/apiAdmin';
-import { filmApi } from '../../../service/filmApi';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
@@ -115,12 +114,10 @@ const AddNewPage = () => {
         formData.append("sapChieu", film.sapChieu);
         apiAddNewFilm(formData)
             .then((res) => {
-                console.log(res);
                 navigate('/showing')
                 window.alert('Thêm phim thành công!')
             })
             .catch((error) => {
-                console.log(error);
                 window.alert('Thêm phim thất bại!')
             })
     }
@@ -129,31 +126,11 @@ const AddNewPage = () => {
         <div className='p-3' style={{marginTop:'50px'}}>
             <h1>Thêm mới phim</h1>
             <form onSubmit={handleOnsubmit}>
-                {/* <div className="form-group row">
-                    <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-right">Font Size</label>
-                    <div className="col-sm-10">
-                        <div className="btn-group">
-
-                            <button className="btn btn-primary">Small</button>
-                            <button className="btn btn-primary">Default</button>
-                            <button className="btn btn-primary">Large</button>
-                        </div>
-                    </div>
-                </div> */}
-                {/* <div className="form-group row">
-                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Mã phim</label>
-                    <div className="col-sm-10">
-                        <input name='maPhim' onChange={(e) => {
-                            handleOnchange(e);
-                        }} type="number" className="form-control bg-dark text-white" />
-                    </div>
-                </div> */}
                 <div className="form-group row">
                     <label htmlFor="" className="col-sm-2 col-form-label text-right">Tên phim</label>
                     <div className="col-sm-10">
                         <input name='tenPhim' onChange={(e) => {
                             handleOnchange(e);
-                            // handleOnchangeSpecial(e);
                         }} type="text" className="form-control bg-dark text-white" />
                     </div>
                 </div>
@@ -173,8 +150,6 @@ const AddNewPage = () => {
                     <label htmlFor="" className="col-sm-2 col-form-label text-right">Ngày khởi chiếu</label>
                     <div className="col-sm-10">
                         <input name='ngayKhoiChieu' onChange={(e) => {
-                            //    const date = new Date()
-                            //    console.log(moment(date).format('DD/MM/YYYY'))
                             setFilm({
                                 ...film,
                                 ngayKhoiChieu:moment(e.target.value).format('DD/MM/YYYY')
@@ -231,11 +206,6 @@ const AddNewPage = () => {
                     <label htmlFor="" className="col-sm-2 col-form-label text-right"></label>
                     <div className="col-sm-10">
                         <button
-                            onClick={
-                                () => {
-                                    console.log(film);
-                                }
-                            }
                             className="btn btn-primary btn-lg btn-block">Thêm phim</button>
                     </div>
                 </div>

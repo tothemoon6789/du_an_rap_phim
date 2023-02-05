@@ -1,104 +1,59 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import { apiLogin } from '../../../service/apiLogin';
-import { apiSingIn } from '../../../service/apiSingIn';
+import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Spiner from '../../../components/Loading/Spiner';
+import { apiSingIn } from '../../../service/apiAdmin';
 
-class SingIngPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            singIn: {
-                taiKhoan: '',
-                matKhau: "",
-                nhapLaiMatKhau: '',
-                email: "",
-                soDt: "",
-                maNhom: "GP05",
-                hoTen: ""
-            },
-            error: {
-                taiKhoan: '',
-                matKhau: '',
-                nhapLaiMatKhau: '',
-                email: "",
-                soDt: "",
-                hoTen: ""
-            },
-            taiKhoanValid: false,
-            matKhauValid: false,
-            nhapLaiMatKhauValid: false,
-            emailValid: false,
-            soDtValid: false,
-            hoTenValid: false,
+const SingIngPage = () => {
+    const navigate = useNavigate()
+    const [state, setState] = useState({
+        singIn: {
+            taiKhoan: '',
+            matKhau: "",
+            nhapLaiMatKhau: '',
+            email: "",
+            soDt: "",
+            maNhom: "GP05",
+            hoTen: "",
+            maLoaiNguoiDung: 'KhachHang',
+        },
+        error: {
+            taiKhoan: '',
+            matKhau: '',
+            nhapLaiMatKhau: '',
+            email: "",
+            soDt: "",
+            hoTen: ""
+        },
+        taiKhoanValid: false,
+        matKhauValid: false,
+        nhapLaiMatKhauValid: false,
+        emailValid: false,
+        soDtValid: false,
+        hoTenValid: false,
 
-            fullFilled: '',
-            spiner: false,
-            theme: 'darkTheme'
+        fullFilled: '',
+        spiner: false,
+        theme: 'darkTheme'
 
-        }
-    }
-
-    render() {
-        return (
-            <div className='container'>
-                <form onSubmit={this.handelOnSubmit}>
-                    <div className="row form-group justify-content-center">
-                        <div className="col-md-4 py-4 my-2 border rounded shadow">
-                            <h1 className='mb-3'>Đăng ký</h1>
-                            <input name='taiKhoan' onChange={this.handleOnChange} onBlur={this.handleOnError} className='form-control mt-2' placeholder="Tài khoản" type="text" />
-                            <div className='text-danger'>{this.state.error.taiKhoan}</div>
-                            <input name='matKhau' onChange={this.handleOnChange} onBlur={this.handleOnError} className='form-control mt-2' placeholder="Mật khẩu" type="password" />
-                            <div className='text-danger'>{this.state.error.matKhau}</div>
-                            <input name='nhapLaiMatKhau' onChange={this.handleOnChange} onBlur={this.handleOnError} className='form-control mt-2' placeholder="Nhập lại mật khẩu" type="password" />
-                            <div className='text-danger'>{this.state.error.nhapLaiMatKhau}</div>
-                            <input name='email' onChange={this.handleOnChange} onBlur={this.handleOnError} className='form-control mt-2' placeholder="Email" type="email" />
-                            <div className='text-danger'>{this.state.error.email}</div>
-                            <input name='soDt' onChange={this.handleOnChange} onBlur={this.handleOnError} className='form-control mt-2' placeholder="Số điện thoại" type="number" />
-                            <div className='text-danger'>{this.state.error.soDt}</div>
-                            <input name='hoTen' onChange={this.handleOnChange} onBlur={this.handleOnError} className='form-control mt-2' placeholder="Họ tên" type="text" />
-                            <div className='text-danger'>{this.state.error.hoTen}</div>
-                            <div className="text-danger">{this.state.fullFilled}</div>
-                            <div className='d-flex justify-content-end mt-5'>
-
-                                <NavLink to="/login" className="btn btn-outline-primary">Đăng nhập</NavLink>
-                                <button type='submit' className="btn btn-primary ml-2">Đăng ký
-
-
-                                </button>
-                                {/* <input type='submit' className="btn btn-primary ml-2" value="Đăng ký" /> */}
-                            </div>
-                            {this.state.spiner ?
-                                <div className="d-flex justify-content-center">
-                                    <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-
-
-                                </div> : ''
-                            }
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-        );
-    }
-    handleOnChange = (event) => {
+    })
+    const handleOnChange = (event) => {
         const { name, value } = event.target
-        this.setState({
-            ...this.state,
+        setState({
+            ...state,
             singIn: {
-                ...this.state.singIn,
-
+                ...state.singIn,
                 [name]: value,
             }
 
         })
 
     }
-    handleOnError = (event) => { //! onBlur
+    const handleOnError = (event) => { //! onBlur
         const { name, value } = event.target
         let mess = value.trim() === '' ? "* Không được để trống!" : ''
-        let { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = this.state
-        let { matKhau, nhapLaiMatKhau } = this.state.singIn
+        let { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = state
+        let { matKhau, nhapLaiMatKhau } = state.singIn
         switch (name) {
             case 'taiKhoan':
                 taiKhoanValid = mess === '' ? true : false
@@ -145,10 +100,10 @@ class SingIngPage extends Component {
 
                 break;
         }
-        this.setState({
-            ...this.state,
+        setState({
+            ...state,
             error: {
-                ...this.state.error,
+                ...state.error,
                 [name]: mess
             },
             taiKhoanValid,
@@ -159,16 +114,22 @@ class SingIngPage extends Component {
             hoTenValid,
         })
     }
-    handelOnSubmit = (event) => {
+    const handelOnSubmit = (event) => {
+
+
         event.preventDefault()
-        const { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = this.state
+        setState({
+            ...state,
+            spiner: true,
+        })
+        const { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = state
         if (taiKhoanValid && matKhauValid && emailValid && soDtValid && hoTenValid && nhapLaiMatKhauValid) {
-            this.setState({
-                ...this.state,
+            setState({
+                ...state,
                 fullFilled: '',
                 spiner: true,
             })
-            const { taiKhoan, matKhau, email, soDt, maNhom, hoTen } = this.state.singIn
+            const { taiKhoan, matKhau, email, soDt, maNhom, hoTen, maLoaiNguoiDung } = state.singIn
 
             const data = {
                 taiKhoan,
@@ -177,30 +138,77 @@ class SingIngPage extends Component {
                 soDt,
                 maNhom,
                 hoTen,
+                maLoaiNguoiDung
             }
+            // console.log(data);
+            // return
             apiSingIn(data)
                 .then((res) => {
-                    this.setState({
-                        ...this.state,
+                    console.log(res);
+                    setState({
+                        ...state,
                         spiner: false,
                     })
-                    
+                    navigate('/login')
+                    window.alert('Đăng ký thành công !')
+
                 })
                 .catch((error) => {
-                    this.setState({
-                        ...this.state,
+                    console.log(error);
+                    setState({
+                        ...state,
                         spiner: true,
                     })
+                    window.alert('Đăng ký thất bại!')
                 })
 
         } else {
-            this.setState({
-                ...this.state,
+            setState({
+                ...state,
                 fullFilled: '* Vui lòng nhập liệu',
             })
         }
     }
 
+
+    return (
+        <div className='container'>
+            <form onSubmit={handelOnSubmit}>
+                <div className="row form-group justify-content-center">
+                    <div className="col-md-4 py-4 my-2 border rounded shadow">
+                        <h1 className='mb-3'>Đăng ký</h1>
+                        <input name='taiKhoan' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Tài khoản" type="text" />
+                        <div className='text-danger'>{state.error.taiKhoan}</div>
+                        <input name='matKhau' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Mật khẩu" type="password" />
+                        <div className='text-danger'>{state.error.matKhau}</div>
+                        <input name='nhapLaiMatKhau' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Nhập lại mật khẩu" type="password" />
+                        <div className='text-danger'>{state.error.nhapLaiMatKhau}</div>
+                        <input name='email' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Email" type="email" />
+                        <div className='text-danger'>{state.error.email}</div>
+                        <input name='soDt' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Số điện thoại" type="number" />
+                        <div className='text-danger'>{state.error.soDt}</div>
+                        <input name='hoTen' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Họ tên" type="text" />
+                        <div className='text-danger'>{state.error.hoTen}</div>
+                        <div className="text-danger">{state.fullFilled}</div>
+                        <div className='d-flex justify-content-end mt-5'>
+
+                            <NavLink to="/login" className="btn btn-outline-primary">Đăng nhập</NavLink>
+                            <button type='submit' className="btn btn-primary ml-2">Đăng ký
+
+
+                            </button>
+                            {/* <input type='submit' className="btn btn-primary ml-2" value="Đăng ký" /> */}
+                        </div>
+                        {state.spiner ?
+                            <Spiner />
+                            : ''
+                        }
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    );
 
 }
 

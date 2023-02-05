@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Film from '../../../components/Film/Film';
 import Spiner from '../../../components/Loading/Spiner';
-import { filmApi } from '../../../service/filmApi';
-import { apiTheaterDetail, apiTheater } from '../../../service/theaterApi';
+import { apiTheater, apiTheaterDetailShowing, filmApi } from '../../../service/apiHome';
 import Carousel from './Carousel';
 import FilmOnTheater from './FilmOnTheater';
 import Theater from './Theater';
@@ -41,14 +40,13 @@ const HomePage = () => {
             loading: true,
             data: null,
         })
-        apiTheaterDetail(theaterCode)
+        apiTheaterDetailShowing(theaterCode)
             .then((res) => {
                 setTheaterDetail({
                     ...theaterDetail,
                     loading: false,
                     data: res.data.content[0],
                 })
-                console.log(res);
                 setFilmDetail({
                     ...filmDetail,
                     data: res.data.content[0].lstCumRap[0],
@@ -106,9 +104,6 @@ const HomePage = () => {
                 })
             })
     }, [])
-    useEffect(() => {
-        console.log(filmDetail);
-    }, [filmDetail.data])
     const renderShowingFilm = () => {
         if (film.data) {
             return film.data.map((film, index) => {
@@ -145,7 +140,6 @@ const HomePage = () => {
     }
     const renderFilmOnTheater = () => {
         if (filmDetail.data && filmDetail.data.danhSachPhim.length > 0) {
-            console.log(filmDetail.data.danhSachPhim);
             return filmDetail.data.danhSachPhim.map((filmOnTheater, index) => {
                 return <FilmOnTheater key={index} filmOnTheater={filmOnTheater} />
 
@@ -156,7 +150,6 @@ const HomePage = () => {
         refToScroll.current.scrollIntoView()
     }
     const handelTheaterDetailOnClick = (itemClicked) => {
-        console.log(itemClicked);
         setFilmDetail({
             ...filmDetail,
             data: itemClicked,

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useRef } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Outlet, Link, useFetcher } from 'react-router-dom';
-// import { apiTheaterDetail } from '../../service/theaterApi';
 import LoginAdminPage from './LoginAdminPage/LoginAdminPage';
 
 const AdminTemplate = (props) => {
@@ -13,37 +11,26 @@ const AdminTemplate = (props) => {
     const [btnClose, setBtnClose] = useState('inline-block')
     const [btnCloseOnTop, setBtnCloseOnTop] = useState(true)
 
-    // const [macumrap, setMaCumRap] = useState('MegaGS')
 
     const [width, setWidth] = useState(0)
     const handleOnResize = (e) => {
         setWidth(window.innerWidth)
     }
-// useEffect(() => {
-//     apiTheaterDetail(macumrap)
-//     .then((res) => {
-//         console.log(res); 
-//     }) 
-// },[macumrap])
     useEffect(() => {
         window.addEventListener('resize', handleOnResize);
         return () => {
-            // console.log('removeed');
             window.removeEventListener('resize', handleOnResize)
         }
     }, [])
     useEffect(() => {
         if (width > 768) {
-            // console.log(width);
             setShowNavBar('admin-left-navbar')
             setBtnClose('none')
             setBtnCloseOnTop(false)
         } else {
-            // console.log(width);
             setBtnClose('inline-block')
             setBtnCloseOnTop(true)
         }
-        // console.log(width);
     }, [width])
 
 
@@ -52,14 +39,11 @@ const AdminTemplate = (props) => {
 
 
     useEffect(() => {
-        // console.log(window.innerWidth);
         if (window.innerWidth > 768) {
-            // console.log(width);
             setShowNavBar('admin-left-navbar')
             setBtnClose('none')
             setBtnCloseOnTop(false)
         } else {
-            // console.log(width);
             setBtnClose('inline-block')
             setBtnCloseOnTop(true)
         }
@@ -76,8 +60,6 @@ const AdminTemplate = (props) => {
                         height: "100vh",
                         position: 'fixed',
                         border: '1px solid rgba(255,255,255,0.2)',
-                        // marginTop: '50px',
-                        // background:'#12121'
                     }
                 }>
                     <div className='text-center p-3'>
@@ -93,9 +75,6 @@ const AdminTemplate = (props) => {
                         <Link to='/'><button className='btn btn-primary ml-2'>TRANG CHỦ</button></Link>
                     </div>
                     <ul className='list-group'>
-                        {/* <li className='list-item p-2'>
-                            <NavLink end className={({ isActive }) => isActive ? 'bg-primary text-light nav-link text-white' : 'nav-link text-white'} to='' ><i className="fa-solid fa-house-user"></i>  Dashboard</NavLink>
-                        </li> */}
                         <li className='list-item p-2'>
                             <NavLink end className={({ isActive }) => isActive ? 'bg-primary text-light nav-link text-white' : 'nav-link text-white'} to=''><i className="fa-solid fa-film"></i>   Quản lý phim</NavLink>
                         </li>
@@ -118,13 +97,11 @@ const AdminTemplate = (props) => {
                     onClick={() => {
                         logOut()
                     }}
-                    className='btn'><i class="fa-solid fa-right-from-bracket" style={{ fontSize: '30px' }}></i></button></div>
-                    {/* </div> */}
+                    className='btn'><i className="fa-solid fa-right-from-bracket" style={{ fontSize: '30px' }}></i></button></div>
                 </div>
                 <div className='admin-right-content'>
                     <div className='fixed-top d-flex justify-content-between align-items-center'
                         style={{
-                            // marginLeft:'25%',
                             padding: '10px',
                             height: '50px',
                             borderLeft: 'none',
@@ -144,10 +121,8 @@ const AdminTemplate = (props) => {
                         >MENU</button>
 
                     </div>
-                            {/* <div className='p-5'> */}
 
                     <Outlet />
-                            {/* </div> */}
                 </div>
             </div>
         </>

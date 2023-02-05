@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { apiMakeShowing, apiTheaterDetail } from '../../../service/apiAdmin';
-import { filmApi } from '../../../service/filmApi';
-import { apiTheater } from '../../../service/theaterApi';
 import moment from 'moment';
+import { apiTheater, filmApi } from '../../../service/apiHome';
 
 const ShowTimesPage = () => {
     const [maPhim, setMaPhim] = useState(null)
@@ -19,35 +18,26 @@ const ShowTimesPage = () => {
     useEffect(() => {
         filmApi
         .then((res) => {
-            // console.log(res); 
             setMaPhim(res.data.content)
         })
         .catch((error) => {
-            // console.log(error); 
         })
     },[])
     useEffect(() => {
         apiTheater.then((res) => {
-            // console.log(res);
             setTheater(res.data.content)
         })
             .catch((error) => {
-                // console.log(error);
             })
     }, [])
     useEffect(() => {
         apiTheaterDetail(theaterSelected)
             .then((res) => {
-                // console.log(res);
                 setTheaterDetail(res.data.content)
             })
             .catch((error) => {
-                // console.log(error);
             })
     }, theaterSelected)
-    useEffect(() => {
-        // console.log(theater);
-    }, [theater])
     const renderTheater = () => {
         if (theater.length > 0) {
             return theater.map((item) => {
@@ -83,7 +73,6 @@ const ShowTimesPage = () => {
     }
     const handleOnsubmit = (e) => {
         e.preventDefault()
-        // console.log(theaterSelected,theaterDetailSelected,price,daySelected);
         const data = {
             maPhim: maPhiSelected*1,
             ngayChieuGioChieu: daySelected,
@@ -93,10 +82,8 @@ const ShowTimesPage = () => {
           console.log(data);
         apiMakeShowing(data)
         .then((res) => {
-            // console.log(res); 
         })
         .catch((error) => {
-            // console.log(error); 
         })
     }
     return (
@@ -105,8 +92,8 @@ const ShowTimesPage = () => {
                 handleOnsubmit(e)
             }}>
                 <h1>Tạo lịch chiếu</h1>
-                <h3>Aventer 2023</h3>
-                <img src="https://i.pravatar.cc" width={400} alt="" />
+                {/* <h3>Aventer 2023</h3> */}
+                {/* <img src="https://i.pravatar.cc" width={400} alt="" /> */}
                 <div className="row mt-2 ">
                     <div className="col-md-2 text-right">
                         <label htmlFor="">Mã phim</label>
@@ -166,14 +153,6 @@ const ShowTimesPage = () => {
 
                             <input
                             onChange={(e) => {
-                                // const time = Date.parse(e.target.value);
-                                // const day = new Date(time)
-                                // console.log(day.getUTCDate());
-                                // const converTime = `${day.getDate()}/${day.getMonth()}/${day.getFullYear()} ${day.getHours()}:${day.getMinutes()}:${day.getSeconds()}`
-                                // const today = time.
-                                // console.log(day.getFullYear());
-                                // console.log(converTime);
-                                
                                 setDaySelected(moment(e.target.value).format('DD/MM/YYYY hh:mm:ss'))
                             }}
                             type="datetime-local" name="" id="" className='form-control bg-dark text-white' />

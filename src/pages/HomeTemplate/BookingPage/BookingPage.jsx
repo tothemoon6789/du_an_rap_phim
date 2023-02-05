@@ -41,11 +41,8 @@ const BookingPage = (props) => {
                 minute:date.getMinutes(),
                 second:date.getSeconds(),
             })
-            // let 
-            // console.log(date.getMilliseconds());
         }, 1000);
         return () => {
-            console.log('CLEAR INTERVAL');
             clearInterval(timer)
         }
     },[])
@@ -79,7 +76,6 @@ const BookingPage = (props) => {
             })
     }, [booking])
     const handleOnclickSeat = (itemClicked) => {
-        console.log(itemClicked);
         setSeated([
             ...seated,
             {
@@ -99,17 +95,9 @@ const BookingPage = (props) => {
         })
     }
     const handleOnRemoveSeat = (itemClicked) => {
-        // console.log(item);
         setSeated(seated.filter((item) => {
             return item.tenGhe * 1 !== itemClicked.tenGhe * 1
         }))
-        // console.log(seated);
-        // const check = seated.filter((item) => {
-        //     console.log(item);
-        //     console.log(itemClicked.tenGhe);
-        //     return item !== itemClicked.tenGhe
-        // })
-        // console.log(check);
         setBookingAction({
             ...bookingAction,
             danhSachVe: bookingAction.danhSachVe.filter((item) => {
@@ -119,7 +107,6 @@ const BookingPage = (props) => {
         })
     }
     useEffect(() => {
-        // console.log(bookingAction);
     }, [bookingAction])
 
     const renderSeat = (row) => {
@@ -149,7 +136,6 @@ const BookingPage = (props) => {
             }
         ]
     }
-    // console.log(info);
     return (
         <div className='container'>
             {/* //! Test dat ve */}
@@ -203,10 +189,6 @@ const BookingPage = (props) => {
                             })}</h4>
                         </div>
                         <hr />
-                        {/* <div className='d-flex justify-content-between'>
-                            <h4 className='d-inline-block'>ƯU ĐÃI</h4>
-                            <h4 className='d-inline-block'>0%</h4>
-                        </div> */}
                         <div className='d-flex justify-content-between'>
                             <h4 className='d-inline-block'>Tổng tiền</h4>
                             <h4 className='d-inline-block'>{seated.length!==0 ? seated.reduce((total,obj) => {
@@ -218,11 +200,9 @@ const BookingPage = (props) => {
                             onClick={() => {
                                 setSpinerBooking(true)
                                 apiBooking(bookingAction, accessToken).then((res) => {
-                                    console.log(res);
                                     window.alert("Đặt vé thành công!")
                                     navigate('/user')
                                 }).catch((error) => {
-                                    console.log(error);
                                     window.alert('Vui lòng đăng nhập trước khi đặt vé!')
                                     navigate('/login')
                                 })
@@ -249,11 +229,6 @@ const BookingPage = (props) => {
                     <div style={{ width: "10px", height: "10px", background: "red" }}></div>
                     <span className='ml-2'>Đang chọn</span>
                 </div>
-                
-                {/* <div className='d-flex align-items-center ml-2'>
-                    <div style={{ width: "10px", height: "10px", background: "orange" }}></div>
-                    <span className='ml-2'>Ghế thường</span>
-                </div> */}
             </div>
 
         </div>

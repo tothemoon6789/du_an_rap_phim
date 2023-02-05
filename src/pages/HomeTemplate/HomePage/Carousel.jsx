@@ -29,7 +29,7 @@ export default function Carousel() {
           }
         }
         modules={[Pagination, Autoplay]}
-        className="mySwiper"
+        className="mySwiper shadow animate__animated animate__fadeIn"
       >
         <SwiperSlide>
 
