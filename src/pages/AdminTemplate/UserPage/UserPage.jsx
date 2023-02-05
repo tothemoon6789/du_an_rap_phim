@@ -118,7 +118,7 @@ const UserPage = () => {
             const cloneData = [...state.data]
             const searchKey = event.target.value;
             const resultSearch = cloneData.filter((user) => {
-                return user.hoTen.toLowerCase().search(searchKey) !== -1
+                return user.hoTen.toLowerCase().search(searchKey.toLowerCase()) !== -1
             })
             setState({
                 ...state,
@@ -127,7 +127,6 @@ const UserPage = () => {
         }
     }
     const handleResetState = () => {
-        console.log('on reset');
         setState({
             ...state,
             random: new Date().getMilliseconds(),
@@ -136,17 +135,17 @@ const UserPage = () => {
    
     const { currentPage } = state
     return (
-        <div className='p-5'>
-            <h1>Thêm người dùng</h1>
+        <div className='p-3' style={{marginTop:'50px'}}>
+            <h1>Quản trị người dùng</h1>
             <div className="form-group">
                 <input
                     onChange={
                         handelOnChange
 
                     }
-                    type="text" className="form-control" placeholder='Nhập tên người dùng' />
+                    type="text" className="form-control bg-dark text-white" placeholder='Nhập tên người dùng' />
             </div>
-            <table className="table">
+            <table className="table text-white">
                 <thead>
                     <tr>
                         <th>STT</th>
@@ -223,6 +222,7 @@ const UserPage = () => {
             </nav>
             <UserEdit users = {user} handleResetState={handleResetState}/>
         </div>
+        
 
     );
 

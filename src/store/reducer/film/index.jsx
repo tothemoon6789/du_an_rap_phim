@@ -3,6 +3,7 @@ const initFilm = {
     listFilm: [],
     searchKey: '',
     listSearchFilm: [],
+    booking: {},
 }
 const filmReducer = (state = initFilm, action) => {
     switch (action.type) {
@@ -18,14 +19,19 @@ const filmReducer = (state = initFilm, action) => {
                 listSearchFilm: action.payload,
             }
         case 'SEARCH_FILM':
-            console.log(action.payload.length);
             const allFilm = [...state.listFilm];
             const filmFilter = allFilm.filter((film) => {
-                return film.tenPhim.toLowerCase().search(action.payload) !== -1
+                return film.tenPhim.toLowerCase().search(action.payload.toLowerCase()) !== -1
             })
             return {
                 ...state,
-                listSearchFilm : filmFilter,
+                listSearchFilm: filmFilter,
+            }
+        case 'BOOKING':
+            console.log(action.payload);
+            return {
+                ...state,
+                booking: action.payload,
             }
         default:
             return { ...state }

@@ -27,10 +27,9 @@ class ShowingPage extends Component {
                     ...this.state,
                     loading: false,
                     data: res.data.content,
-                }, () => console.log(this.state))
+                })
             })
             .catch((error) => {
-                console.log(error);
             })
         
     }
@@ -54,9 +53,9 @@ class ShowingPage extends Component {
                 return (film.dangChieu ?
 
 
-                    <div className="col-md-3">
+                    <div key={index} className="col-md-3">
 
-                        <Film key={index} film={film} />
+                        <Film  film={film} />
                     </div>
                     :
                     ""

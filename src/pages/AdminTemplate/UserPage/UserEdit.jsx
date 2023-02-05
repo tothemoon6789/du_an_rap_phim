@@ -160,7 +160,7 @@ const UserEdit = (props) => {
         event.preventDefault()
         // handleOnError(event)
         const { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = valid
-        console.log(taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid);
+        // console.log(taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid);
         if (taiKhoanValid && matKhauValid && emailValid && soDtValid && hoTenValid && nhapLaiMatKhauValid) {
             setOnPage({
                 ...onPage,
@@ -184,22 +184,18 @@ const UserEdit = (props) => {
 
             apiLogin(data)
                 .then((res) => {
-                    // console.log(res);
                     apiEditUser(userEdited, res.data.content.accessToken)
                         .then((res) => {
                             alert("Cập nhật thành công!")
                             modalRef.current.click()
                             handleResetState()
-                            console.log(res);
                         })
                         .catch((error) => {
                             alert('Cập nhật thất bại!')
-                            console.log(error);
                         })
 
                 })
                 .catch((error) => {
-                    console.log(error);
                 })
 
         } else {

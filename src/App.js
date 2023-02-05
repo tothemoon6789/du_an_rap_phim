@@ -44,14 +44,14 @@ function App() {
           <Route path='*' element={<HomePage />}></Route>
 
         </Route>
-        <Route path='admin' element={<AdminTemplate />}>
+        <Route path='admin'  element={<AdminTemplate />}>
 
-          <Route index element={<DashboardPage />}></Route>
-          <Route path='manage-user' element={<UserPage />}></Route>
-          <Route path='film' element={<ManageFilmPage />}></Route>
-          <Route path='addnew' element={<AddNewPage />}></Route>
-          <Route path='show-time' element={<ShowTimesPage />}></Route>
-          <Route path='add-new-user' element={<AddNewUserPage />}></Route>
+          {/* <Route path=''   element={<DashboardPage />}></Route> */}
+          <Route index  element={<ManageFilmPage />}></Route>
+          <Route path='manage-user' exact element={<UserPage />}></Route>
+          <Route path='addnew' exact element={<AddNewPage />}></Route>
+          <Route path='show-time' exact element={<ShowTimesPage />}></Route>
+          <Route path='add-new-user' exact element={<AddNewUserPage />}></Route>
 
         </Route>
         <Route path='user'>

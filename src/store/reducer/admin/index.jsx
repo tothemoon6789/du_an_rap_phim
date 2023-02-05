@@ -1,24 +1,29 @@
 const initAdmin = {
-    accessToken:'',
+    accessToken: '',
     adminInfo: {},
     adminInfoSearch: {},
 }
 
-const adminReducer = (state=initAdmin,action) => {
+const adminReducer = (state = initAdmin, action) => {
     switch (action.type) {
         case 'ADMIN_LOGIN':
-            
+
             return {
                 ...state,
                 accessToken: action.payload.accessToken,
                 adminInfo: action.payload,
             }
         case 'SEARCH_USER':
-            console.log(action.payload);
-            const cloneData = {...state.adminInfo}
-            console.log(cloneData);
+            const cloneData = { ...state.adminInfo }
             return {
                 ...state,
+            }
+        case 'LOG_OUT':
+            console.log('inside log out');
+            window.alert('Đăng xuất thành công!')
+            return {
+                ...state,
+                accessToken: '',
             }
         default:
             return {

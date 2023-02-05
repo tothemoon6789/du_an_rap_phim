@@ -22,7 +22,7 @@ class HomeTemplate extends Component {
                 <div className={`${theme}`}>
                     {/* //TODO: navbar */}
                     <div className='container'>
-                        <Link to='/admin'>ADMIN</Link>
+                        {/* <Link to='/admin'>ADMIN</Link> */}
                         <nav className="navbar navbar-expand-md">
                             <NavLink className="navbar-brand " to=""><i className="fa-solid fa-film" style={{ fontSize: "50px" }}></i><h1 className='ml-2 d-inline-block'>CINEMA</h1></NavLink>
                             <button
@@ -32,22 +32,23 @@ class HomeTemplate extends Component {
                             </button>
                             <div className="collapse navbar-collapse" id="collapsibleNavId">
                                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                                    <li className="nav-item active ml-3">
+                                    {/* <li className="nav-item active ml-3">
                                         <NavLink to="" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Trang chủ</NavLink>
-                                    </li>
-                                    <li className="nav-item ml-3">
+                                    </li> */}
+                                    {/* <li className="nav-item ml-3">
                                         <NavLink to="/booking" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Booking</NavLink>
+                                    </li> */}
+                                    <li className="nav-item ml-3">
+                                        <NavLink to="/showing" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link p-2' : 'nav-link p-2'} >Phim đang chiếu</NavLink>
                                     </li>
                                     <li className="nav-item ml-3">
-                                        <NavLink to="/showing" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Phim đang chiếu</NavLink>
-                                    </li>
-                                    <li className="nav-item ml-3">
-                                        <NavLink to="/comming-soon" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link' : 'nav-link'} >Phim sắp chiếu</NavLink>
+                                        <NavLink to="/comming-soon" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link p-2' : 'nav-link p-2'} >Phim sắp chiếu</NavLink>
                                     </li>
                                 </ul>
                                 <button
-                                    onClick={this.handleDarkTheme}>
-                                    <i className="fa-solid fa-sun" ></i>
+                                className='btn btn-default'
+                                    onClick={this.handleDarkTheme}>{theme==='darkTheme' ? <i style={{color:'white'}} className="fa-solid fa-sun" ></i>:<i className="fa-solid fa-moon"></i>}
+                                    
                                 </button>
                                 {accessToken === '' ?
                                     <div>
@@ -119,7 +120,7 @@ class HomeTemplate extends Component {
                                     </button>
                                 </div>
                             </div>
-                            <hr className='bg-white' />
+                            <hr className='bg-white' style={{opacity:'0.2'}}/>
                             <div>
                                 <i className="fa-solid fa-film" style={{ fontSize: '100px' }} />
                                 <h4>CÔNG TY TNHH MTV BBM MOVIE THEATER</h4>

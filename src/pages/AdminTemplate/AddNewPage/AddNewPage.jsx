@@ -1,98 +1,251 @@
 import React, { Component } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { apiAddNewFilm } from '../../../service/apiAdmin';
+import { filmApi } from '../../../service/filmApi';
+import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
-class AddNewPage extends Component {
-    render() {
-        return (
-            <div className='ml-25%'>
-                <h1>Thêm mới phim</h1>
-                <form>
-                    <div className="form-group row">
-                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-right">Font Size</label>
-                        <div className="col-sm-10">
-                            <div className="btn-group">
-
-                                <button type="button" className="btn btn-primary">Small</button>
-                                <button type="button" className="btn btn-primary">Default</button>
-                                <button type="button" className="btn btn-primary">Large</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Tên phim</label>
-                        <div className="col-sm-10">
-                            <input type="password" className="form-control" />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Trailer</label>
-                        <div className="col-sm-10">
-                            <input type="password" className="form-control" />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Mô tả</label>
-                        <div className="col-sm-10">
-                            <input type="password" className="form-control" />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Ngày khởi chiếu</label>
-                        <div className="col-sm-10">
-                            <input type="date" className="form-control" />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Đang chiếu</label>
-                        <div className="col-sm-10">
-
-                            <input type="checkbox" style={{ transform: 'scale(2)' }} />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Sắp chiếu</label>
-                        <div className="col-sm-10">
-
-                            <input type="checkbox" style={{ transform: 'scale(2)' }} />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Hot chiếu</label>
-                        <div className="col-sm-10">
-
-                            <input type="checkbox" style={{ transform: 'scale(2)' }} />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Số sao</label>
-                        <div className="col-sm-10">
-                            <input type="text" className="form-control" style={{ width: '50%' }} />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right">Hình ảnh</label>
-                        <div className="col-sm-10">
-                            <input type="file" className="" style={{ width: '50%' }} />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right"></label>
-                        <div className="col-sm-10">
-                            <img src="https://i.pravatar.cc" alt="..." width={'50%'} />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="" className="col-sm-2 col-form-label text-right"></label>
-                        <div className="col-sm-10">
-                            <button type="button" name id className="btn btn-primary btn-lg btn-block">Thêm phim</button>
-                        </div>
-                    </div>
-
-                </form>
-
-
-            </div>
-        );
+const AddNewPage = () => {
+    const navigate = useNavigate()
+    const [film, setFilm] = useState({
+        maPhim: 5000, //done
+        tenPhim: '', //done
+        biDanh: '',
+        trailer: '', //done
+        hinhAnh: '', //done
+        moTa: '', //done
+        maNhom: 'GP05',
+        ngayKhoiChieu: '', //done
+        danhGia: 5, //done
+        hot: true, //done
+        dangChieu: true, //done
+        sapChieu: true, //done
+    })
+    
+    function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
     }
+  
+
+    const handleOnchange = (e) => {
+        const { name, value } = e.target
+        function removeVietnameseTones(str) {
+            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+            str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+            str = str.replace(/đ/g, "d");
+            str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+            str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+            str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+            str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+            str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+            str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+            str = str.replace(/Đ/g, "D");
+            // Some system encode vietnamese combining accent as individual utf-8 characters
+            // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
+            str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+            str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+            // Remove extra spaces
+            // Bỏ các khoảng trắng liền nhau
+            str = str.replace(/ + /g, " ");
+            str = str.trim();
+            // Remove punctuations
+            // Bỏ dấu câu, kí tự đặc biệt
+            str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
+            str = str.replace(/\s/g, "-")
+            return str.toLowerCase();
+        }
+        switch (name) {
+            case 'tenPhim':
+                setFilm({
+                    ...film,
+                    biDanh: removeVietnameseTones(value),
+                    [name]: value,
+                })
+                break;
+            case 'danhGia':
+                setFilm({
+                    ...film,
+                    danhGia: value * 1,
+                })
+                break;
+            case 'maPhim':
+                setFilm({
+                    ...film,
+                    maPhim: value * 1,
+                })
+                break;
+            default:
+                setFilm({
+                    ...film,
+                    [name]: value
+                })
+                break;
+        }
+
+    }
+    const handleOnchecked = (e) => {
+        const { name, checked } = e.target
+        setFilm({
+            ...film,
+            [name]: checked,
+        })
+    }
+    const handleOnsubmit = (e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        // formData.append("maPhim", film.maPhim);
+        formData.append("tenPhim", film.tenPhim);
+        formData.append("biDanh", film.biDanh);
+        formData.append("trailer", film.trailer);
+        formData.append("hinhAnh", film.hinhAnh);    
+        // formData.append("hinhAnh", "https://movienew.cybersoft.edu.vn/hinhanh/black-adam_gp01.jpg");    
+        formData.append("moTa", film.moTa);
+        formData.append("maNhom", "GP05");
+        
+        formData.append("ngayKhoiChieu", film.ngayKhoiChieu);
+        // formData.append("ngayKhoiChieu", film.ngayKhoiChieu);
+        formData.append("danhGia", film.danhGia);
+        formData.append("hot", film.hot);
+        formData.append("dangChieu", film.dangChieu);
+        formData.append("sapChieu", film.sapChieu);
+        apiAddNewFilm(formData)
+            .then((res) => {
+                console.log(res);
+                navigate('/showing')
+                window.alert('Thêm phim thành công!')
+            })
+            .catch((error) => {
+                console.log(error);
+                window.alert('Thêm phim thất bại!')
+            })
+    }
+
+    return (
+        <div className='p-3' style={{marginTop:'50px'}}>
+            <h1>Thêm mới phim</h1>
+            <form onSubmit={handleOnsubmit}>
+                {/* <div className="form-group row">
+                    <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-right">Font Size</label>
+                    <div className="col-sm-10">
+                        <div className="btn-group">
+
+                            <button className="btn btn-primary">Small</button>
+                            <button className="btn btn-primary">Default</button>
+                            <button className="btn btn-primary">Large</button>
+                        </div>
+                    </div>
+                </div> */}
+                {/* <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Mã phim</label>
+                    <div className="col-sm-10">
+                        <input name='maPhim' onChange={(e) => {
+                            handleOnchange(e);
+                        }} type="number" className="form-control bg-dark text-white" />
+                    </div>
+                </div> */}
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Tên phim</label>
+                    <div className="col-sm-10">
+                        <input name='tenPhim' onChange={(e) => {
+                            handleOnchange(e);
+                            // handleOnchangeSpecial(e);
+                        }} type="text" className="form-control bg-dark text-white" />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Trailer</label>
+                    <div className="col-sm-10">
+                        <input name='trailer' onChange={handleOnchange} type="url" className="form-control bg-dark text-white" />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Mô tả</label>
+                    <div className="col-sm-10">
+                        <input name='moTa' onChange={handleOnchange} type="text" className="form-control bg-dark text-white" />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Ngày khởi chiếu</label>
+                    <div className="col-sm-10">
+                        <input name='ngayKhoiChieu' onChange={(e) => {
+                            //    const date = new Date()
+                            //    console.log(moment(date).format('DD/MM/YYYY'))
+                            setFilm({
+                                ...film,
+                                ngayKhoiChieu:moment(e.target.value).format('DD/MM/YYYY')
+                            })
+                        }} type="datetime-local" className="form-control bg-dark text-white" />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Đang chiếu</label>
+                    <div className="col-sm-10">
+
+                        <input name='dangChieu' onChange={handleOnchecked} type="checkbox" style={{ transform: 'scale(2)' }} />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Sắp chiếu</label>
+                    <div className="col-sm-10">
+
+                        <input name='sapChieu' onChange={handleOnchecked} type="checkbox" style={{ transform: 'scale(2)' }} />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Hot chiếu</label>
+                    <div className="col-sm-10">
+
+                        <input name='hot' onChange={handleOnchecked} type="checkbox" style={{ transform: 'scale(2)' }} />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Số sao</label>
+                    <div className="col-sm-10">
+                        <input name='danhGia' onChange={handleOnchange} type="number" className="form-control bg-dark text-white" style={{ width: '50%' }} />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right">Hình ảnh</label>
+                    <div className="col-sm-10">
+                        <input name='hinhAnh' onChange={(e) => {
+                         
+                            setFilm({
+                                ...film,
+                                hinhAnh: e.target.files[0],
+                            })
+                        }} type="file" className="" style={{ width: '50%' }} />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right"></label>
+                    <div className="col-sm-10">
+                        <img src={film.hinhAnh} onChange={handleOnchange} alt="..." width={'50%'} />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="" className="col-sm-2 col-form-label text-right"></label>
+                    <div className="col-sm-10">
+                        <button
+                            onClick={
+                                () => {
+                                    console.log(film);
+                                }
+                            }
+                            className="btn btn-primary btn-lg btn-block">Thêm phim</button>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+    );
+
 }
 
 export default AddNewPage;

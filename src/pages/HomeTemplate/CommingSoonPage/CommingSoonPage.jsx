@@ -27,7 +27,6 @@ class CommingSoonPage extends Component {
             })
         })
         .catch((error) => {
-            console.log(error);
         })
     }
     
@@ -49,8 +48,8 @@ class CommingSoonPage extends Component {
             
             return data.map((film,index) => {
                 return ( film.sapChieu ?
-                    <div className="col-md-3">
-                        <Film key={index} film = {film}/>
+                    <div key={index} className="col-md-3">
+                        <Film  film = {film}/>
                     </div> :
                     ""
                 )

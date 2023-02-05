@@ -27,7 +27,7 @@ class Film extends Component {
                     // window.alert(film.maPhim)
                 }} to="/detail">
                     <div
-                        className="border mt-3 rounded shadow">
+                        className="mt-3 rounded shadow" style={{border:'1px solid rgba(255,255,255,0.2)'}}>
                         <img
                             style={{ height: '250px', objectFit: 'cover', objectPosition: '0% 20%' }}
                             className="card-img-top" src={film.hinhAnh} alt="" />

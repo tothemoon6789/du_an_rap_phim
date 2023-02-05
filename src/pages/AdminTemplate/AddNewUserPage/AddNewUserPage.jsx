@@ -113,7 +113,7 @@ const AddNewUserPage = () => {
         })
     }
     const handelOnSubmit = (event) => {
-        console.log('handleOnsubmit');
+        // console.log('handleOnsubmit');
         event.preventDefault()
         const { taiKhoanValid, matKhauValid, emailValid, soDtValid, hoTenValid, nhapLaiMatKhauValid } = valid
         
@@ -137,7 +137,7 @@ const AddNewUserPage = () => {
           
             apiSingIn(data)
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     setOnPage({
                         ...onPage,
                         spiner: false,
@@ -146,7 +146,7 @@ const AddNewUserPage = () => {
                     alert('Đăng ký thành công!')
                 })
                 .catch((error) => {
-                    console.log(error);
+                    // console.log(error);
                     setOnPage({
                         ...onPage,
                         spiner: true,
@@ -163,22 +163,22 @@ const AddNewUserPage = () => {
 
 
     return (
-        <div className='container'>
+        <div className='container p-3' style={{marginTop:'50px'}}>
             <form onSubmit={handelOnSubmit}>
                 <div className="row form-group justify-content-center">
                     <div className="col-md-4 py-4 my-2 border rounded shadow">
                         <h1 className='mb-3'>Đăng ký</h1>
-                        <input name='taiKhoan' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Tài khoản" type="text" />
+                        <input name='taiKhoan' onChange={handleOnChange} onBlur={handleOnError} className='form-control bg-dark text-white mt-2' placeholder="Tài khoản" type="text" />
                         <div className='text-danger'>{error.taiKhoan}</div>
-                        <input name='matKhau' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Mật khẩu" type="password" />
+                        <input name='matKhau' onChange={handleOnChange} onBlur={handleOnError} className='form-control bg-dark text-white mt-2' placeholder="Mật khẩu" type="password" />
                         <div className='text-danger'>{error.matKhau}</div>
-                        <input name='nhapLaiMatKhau' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Nhập lại mật khẩu" type="password" />
+                        <input name='nhapLaiMatKhau' onChange={handleOnChange} onBlur={handleOnError} className='form-control bg-dark text-white mt-2' placeholder="Nhập lại mật khẩu" type="password" />
                         <div className='text-danger'>{error.nhapLaiMatKhau}</div>
-                        <input name='email' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Email" type="email" />
+                        <input name='email' onChange={handleOnChange} onBlur={handleOnError} className='form-control bg-dark text-white mt-2' placeholder="Email" type="email" />
                         <div className='text-danger'>{error.email}</div>
-                        <input name='soDt' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Số điện thoại" type="number" />
+                        <input name='soDt' onChange={handleOnChange} onBlur={handleOnError} className='form-control bg-dark text-white mt-2' placeholder="Số điện thoại" type="number" />
                         <div className='text-danger'>{error.soDt}</div>
-                        <input name='hoTen' onChange={handleOnChange} onBlur={handleOnError} className='form-control mt-2' placeholder="Họ tên" type="text" />
+                        <input name='hoTen' onChange={handleOnChange} onBlur={handleOnError} className='form-control bg-dark text-white mt-2' placeholder="Họ tên" type="text" />
                         <div className='text-danger'>{error.hoTen}</div>
                         <select
                             onChange={(e) => {
@@ -187,7 +187,7 @@ const AddNewUserPage = () => {
                                     maLoaiNguoiDung: e.target.value,
                                 })
                             }}
-                            className="form-control mt-2">
+                            className="form-control bg-dark text-white mt-2">
                             <option value="KhachHang">Khách hàng</option>
                             <option value='QuanTri'>Quản trị</option>
                         </select>

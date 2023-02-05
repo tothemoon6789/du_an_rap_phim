@@ -17,7 +17,7 @@ class UserList extends Component {
                     <td>{user.maLoaiNguoiDung}</td>
                     <td>{user.email}</td>
                     <td>{user.soDt} </td>
-                    <td>
+                    <td style={{width:'200px'}}>
                         <button
                             onClick={
                                 () => {

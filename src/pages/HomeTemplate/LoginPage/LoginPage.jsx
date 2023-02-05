@@ -14,7 +14,6 @@ const LoginPage = (props) => {
         accessToken: '',
     })
     useEffect(() => {
-        console.log(login);
     }, [login])
     const handleOnchange = (e) => {
         const { name, value } = e.target
@@ -44,7 +43,6 @@ const LoginPage = (props) => {
             })
             apiLogin(data)
                 .then((res) => {
-                    console.log(res);
                     setLogin({
                         ...login,
                         spiner: false,
@@ -60,7 +58,6 @@ const LoginPage = (props) => {
                    
                 })
                 .catch((error) => {
-                    console.log(error);
                     setLogin({
                         ...login,
                         spiner: false,
@@ -107,7 +104,6 @@ const LoginPage = (props) => {
                         <button
                             onClick={() => {
                                 handelLogin()
-                                console.log(props);
                             }}
                             className='btn btn-block btn-primary mt-4'>Đăng nhập</button>
                            <div className='text-center mt-2'><span>Bạn không có tài khoản ? </span><Link to='/sign-in'>Đăng ký</Link></div>

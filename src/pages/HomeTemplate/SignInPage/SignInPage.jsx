@@ -178,10 +178,8 @@ class SingIngPage extends Component {
                 maNhom,
                 hoTen,
             }
-            // console.log(data);
             apiSingIn(data)
                 .then((res) => {
-                    console.log(res);
                     this.setState({
                         ...this.state,
                         spiner: false,
@@ -189,7 +187,6 @@ class SingIngPage extends Component {
                     
                 })
                 .catch((error) => {
-                    console.log(error);
                     this.setState({
                         ...this.state,
                         spiner: true,

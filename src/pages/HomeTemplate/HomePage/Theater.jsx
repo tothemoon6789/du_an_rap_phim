@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 
 class Theater extends Component {
     render() {
-        const { theater, theaterOnClick } = this.props
+        const { theater, handelTheaterOnClick } = this.props
         return (
             <>
-                <button className='btn btn-default'>
+                <button style={{width:'100%'}} className='btn btn-default'>
                     <img
-                        onClick={() => theaterOnClick(theater.maHeThongRap)}
-                        width={"100%"} className='rounded-circle img-thumbnail' src={theater.logo} alt='...' />
+                        onClick={() => handelTheaterOnClick(theater.maHeThongRap)}
+                        style={{width:'100%'}}
+                        
+                        
+                        
+                        className='rounded-circle img-thumbnail' src={theater.logo} alt='...' />
                 </button>
             </>
         );

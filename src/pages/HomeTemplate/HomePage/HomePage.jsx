@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Film from '../../../components/Film/Film';
+import Spiner from '../../../components/Loading/Spiner';
 import { filmApi } from '../../../service/filmApi';
-import { apiShowTimeByTheater, apiTheater } from '../../../service/theaterApi';
+import { apiTheaterDetail, apiTheater } from '../../../service/theaterApi';
 import Carousel from './Carousel';
 import FilmOnTheater from './FilmOnTheater';
 import Theater from './Theater';
@@ -13,11 +14,11 @@ import TheaterDetail from './TheaterDetail';
 const HomePage = () => {
     //TODO: Khai báo dữ liệu
     const refToScroll = React.createRef()
+    const [theaterCode, setTheaterCode] = useState('CGV')
     const [film, setFilm] = useState({
         loading: false,
         data: null,
         error: true,
-
     })
     const [theater, setTheater] = useState({
         loading: false,
@@ -26,16 +27,37 @@ const HomePage = () => {
     })
     const [theaterDetail, setTheaterDetail] = useState({
         loading: false,
-        data: [],
+        data: null,
         error: true,
     })
-    const [theaterCode, setTheaterCode] = useState(
-        'CGV'
-    )
-    const [theaterCodeDetail, setTheaterCodeDetail] = useState(
-        'cgv-aeon-tan-phu'
-    )
-    // TODO: nạp dữ liệu lần đầu sau render
+    const [filmDetail, setFilmDetail] = useState({
+        loading: false,
+        data: null,
+        error: true,
+    })
+    useEffect(() => {
+        setTheaterDetail({
+            ...theaterDetail,
+            loading: true,
+            data: null,
+        })
+        apiTheaterDetail(theaterCode)
+            .then((res) => {
+                setTheaterDetail({
+                    ...theaterDetail,
+                    loading: false,
+                    data: res.data.content[0],
+                })
+                console.log(res);
+                setFilmDetail({
+                    ...filmDetail,
+                    data: res.data.content[0].lstCumRap[0],
+                })
+            })
+            .catch((error) => {
+            })
+    }, [theaterCode])
+    
     useEffect(() => {
         setFilm({
             ...film,
@@ -49,7 +71,6 @@ const HomePage = () => {
             ...theaterDetail,
             loading: true,
         })
-        console.log('SETINTERVAL film');
         filmApi
             .then((res) => {
                 setFilm({
@@ -67,7 +88,6 @@ const HomePage = () => {
                     error: true,
                 })
             })
-        console.log('setinterval theater');
         apiTheater
             .then((res) => {
                 setTheater({
@@ -85,66 +105,14 @@ const HomePage = () => {
                     error: true,
                 })
             })
-        apiShowTimeByTheater
-            .then((res) => {
-                const findIndex = res.data.content.findIndex((theater) => {
-                    return theater.maHeThongRap === theaterCode
-                })
-                if (findIndex !== -1) {
-                    setTheaterDetail({
-                        ...theaterDetail,
-                        loading: false,
-                        data: res.data.content[findIndex].lstCumRap,
-                        error: false,
-                    })
-
-
-                }
-            })
-            .catch((error) => {
-                setTheaterDetail({
-                    ...theaterDetail,
-                    loading: true,
-                    error: true,
-                })
-
-
-            })
-
-        apiShowTimeByTheater
-            .then((res) => {
-                const findIndex = res.data.content.findIndex((theater) => {
-                    return theater.maHeThongRap === theaterCode
-                })
-                if (findIndex !== -1) {
-                    setTheaterDetail({
-                        ...theaterDetail,
-                        loading: false,
-                        data: res.data.content[findIndex].lstCumRap,
-                    }
-
-                    )
-                }
-            })
-            .catch((error) => {
-                setTheaterDetail({
-                    ...theaterDetail,
-                    loading: true,
-                    error: error,
-                })
-
-            })
-
     }, [])
-
-
+    useEffect(() => {
+        console.log(filmDetail);
+    }, [filmDetail.data])
     const renderShowingFilm = () => {
-
         if (film.data) {
-
             return film.data.map((film, index) => {
                 if (film.dangChieu === true) {
-
                     return (
                         <div key={index} className='col-md-3 mt-2'>
                             <Film film={film} />
@@ -159,8 +127,7 @@ const HomePage = () => {
             return theater.data.map((theater, index) => {
                 return (
                     <div key={index} className="col-2 col-md-12 p-0">
-
-                        <Theater theater={theater} theaterOnClick={handelTheaterOnClick} />
+                        <Theater theater={theater} handelTheaterOnClick={handelTheaterOnClick} />
                     </div>
                 )
             })
@@ -168,57 +135,93 @@ const HomePage = () => {
     }
     const renderTheaterDetail = () => {
         if (theaterDetail.data) {
-            return theaterDetail.data.map((theaterDetail, index) => {
+            return theaterDetail.data.lstCumRap.map((theaterDetail, index) => {
+                   
                 return (
                     <TheaterDetail key={index} theaterDetail={theaterDetail} scroll={handelScrollIntoView} handelTheaterDetailOnClick={handelTheaterDetailOnClick} />
-
                 )
             })
         }
-
     }
     const renderFilmOnTheater = () => {
-        if (theaterDetail.data) {
-            const findIndex = theaterDetail.data.findIndex((theaterDetail) => {
-                return theaterDetail.maCumRap === theaterCodeDetail
+        if (filmDetail.data && filmDetail.data.danhSachPhim.length > 0) {
+            console.log(filmDetail.data.danhSachPhim);
+            return filmDetail.data.danhSachPhim.map((filmOnTheater, index) => {
+                return <FilmOnTheater key={index} filmOnTheater={filmOnTheater} />
+
             })
-            if (findIndex !== -1) {
-
-                return theaterDetail.data[findIndex].danhSachPhim.map((filmOnTheater, index) => {
-                    return (
-                        <FilmOnTheater key={index} filmOnTheater={filmOnTheater} />
-                    )
-
-
-                })
-
-            }
-
         }
     }
     const handelScrollIntoView = () => {
         refToScroll.current.scrollIntoView()
     }
-    const handelTheaterOnClick = (itemClicked) => {
-        setTheaterCode({
-            ...theaterCode,
-            theaterCode: itemClicked,
+    const handelTheaterDetailOnClick = (itemClicked) => {
+        console.log(itemClicked);
+        setFilmDetail({
+            ...filmDetail,
+            data: itemClicked,
         })
     }
-    const handelTheaterDetailOnClick = (itemClicked) => {
-        setTheaterCodeDetail({
-            ...setTheaterCodeDetail,
-            theaterCodeDetail: itemClicked,
-        })
+    const handelTheaterOnClick = (itemClicked) => {
+        setTheaterCode(itemClicked)
     }
     return (
         <>
             <Carousel />
-
             <div className='' >
+                {/* //TODO: END CHỌN PHIM _ RẠP _ GIỜ CHIẾU */}
+                {/* //TODO: DANH SACH PHIM */}
+                <div className='container text-dark'>
+                    {/* loading ripple */}
+                    <div className='d-flex justify-content-center'>
+                        {film.loading ?
+                            <Spiner/> :
+                            ''}
+                    </div>
+                    <div className='row'>
+                        {renderShowingFilm()}
+                    </div>
+                </div>
+                {/* //TODO: END DANH SACH PHIM */}
+                {/* //TODO: DANH SACH RAP */}
+                <div className="container mt-2">
+                    <div className='row'>
+                        <div className='col-md-2 p-sm-0 p-md-5' >
+                            {/* loading ripple */}
+                            
+                            {theater.loading ? <Spiner/>: ''}
+                            <div className="row" style={{ maxHeight: '80vh', overflow: 'scroll' }}>
+                                {renderTheater()}
+                            </div>
+                        </div>
+                        <div className='col-md-10'>
+                            <div className="d-flex justify-content-center" >
+                                {/* loading ripple */}
+                                {theaterDetail.loading ? <Spiner/> : ''}
+                            </div>
+                            <div className="row" >
+                                <div className='col-md-4' style={{ maxHeight: '80vh', overflow: 'scroll' }}>
+                                    {renderTheaterDetail()}
+                                </div>
+                                <div ref={refToScroll} className='col-md-8' style={{ maxHeight: '80vh', overflow: 'scroll' }}>
+                                    {renderFilmOnTheater()}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* //TODO: END DANH SACH RAP */}
+            </div>
+        </>
+    );
+}
+export default HomePage;
 
-                {/* //TODO: CHỌN PHIM _ RẠP _ GIỜ CHIẾU */}
-                <div className='position-relative' >
+
+
+
+{/* //TODO: CHỌN PHIM _ RẠP _ GIỜ CHIẾU */ }
+{/* <div className='position-relative' >
                     <div style={{ backgroundImage: "linear-gradient(transparent,black,transparent)" }}>
                         <div className='container py-3'>
                             <div className='row'>
@@ -260,7 +263,6 @@ const HomePage = () => {
                                                 </select>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div className='col-md-2'>
@@ -269,53 +271,4 @@ const HomePage = () => {
                             </div>
                         </div>
                     </div>
-
-                </div>
-                {/* //TODO: END CHỌN PHIM _ RẠP _ GIỜ CHIẾU */}
-                {/* //TODO: DANH SACH PHIM */}
-                <div className='container text-dark'>
-                    {/* loading ripple */}
-                    <div className='d-flex justify-content-center'>
-                        {film.loading ?
-                            <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> :
-                            ''}
-                    </div>
-                    <div className='row'>
-                        {renderShowingFilm()}
-                    </div>
-                </div>
-                {/* //TODO: END DANH SACH PHIM */}
-                {/* //TODO: DANH SACH RAP */}
-
-                <div className="container mt-2 bg-danger">
-                    <div className='row'>
-                        <div className='col-md-2 p-sm-0 p-md-5' >
-                            {/* loading ripple */}
-                            {theater.loading ? <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> : ''}
-                            <div className="row" style={{maxHeight:'80vh',overflow:'scroll'}}>
-                                {renderTheater()}
-                            </div>
-                        </div>
-                        <div className='col-md-10'>
-                            <div className="d-flex justify-content-center" >
-                                {/* loading ripple */}
-                                {theaterDetail.loading ? <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> : ''}
-                            </div>
-                            <div className="row" >
-                                <div className='col-md-4' style={{maxHeight:'80vh',overflow:'scroll'}}>
-                                    {renderTheaterDetail()}
-                                </div>
-                                <div ref={refToScroll} className='col-md-8' style={{maxHeight:'80vh',overflow:'scroll'}}>
-                                    {renderFilmOnTheater()}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* //TODO: END DANH SACH RAP */}
-            </div>
-        </>
-    );
-
-}
-export default HomePage;
+                </div> */}
