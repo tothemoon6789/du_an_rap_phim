@@ -8,7 +8,7 @@
         position: absolute;
         /* background-color: red; */
         
-        width: 25%;
+        width: 80%;
         /* left: -100%; */
         transform: translateX(-150%);
         z-index: 2;
@@ -16,8 +16,8 @@
     .admin-left-navbar-hide {
         /* background-color: yellow; */
         /* background-color: red; */
-        width: 25%;
-        left: -500px;
+        width: 80%;
+        left: -200%;
         /* transform: translateX(-150%); */
         transition: all 0.3s;
         z-index: 2;
@@ -25,7 +25,7 @@
     .admin-left-navbar-show {
         /* background-color: yellow; */
         background-color: #121212;
-        width: 25%;
+        width: 80%;
         margin-top: 50px;
         left: 0;
         z-index: 2;

@@ -60,7 +60,7 @@ const UserTemplate = (props) => {
                             <h3 className='mt-2'>{userInfo.hoTen}</h3>
                             <span className='d-block'>Số điện thoại: {userInfo.soDT}</span>
                             <span className='d-block'>Email: {userInfo.email}</span>
-                            <Link to='/admin'>ADMIN</Link>
+                            {/* <Link to='/admin'>ADMIN</Link> */}
                             <div className="p-3">
 
                                 <button type="button" className="btn btn-default border" data-toggle="modal" data-target="#modelId">Chỉnh sửa</button>

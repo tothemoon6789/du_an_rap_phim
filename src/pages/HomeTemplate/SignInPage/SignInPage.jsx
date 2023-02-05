@@ -60,7 +60,7 @@ class SingIngPage extends Component {
                             <div className="text-danger">{this.state.fullFilled}</div>
                             <div className='d-flex justify-content-end mt-5'>
 
-                                <NavLink to="/login" className="btn border">Đăng nhập</NavLink>
+                                <NavLink to="/login" className="btn btn-outline-primary">Đăng nhập</NavLink>
                                 <button type='submit' className="btn btn-primary ml-2">Đăng ký
 
 

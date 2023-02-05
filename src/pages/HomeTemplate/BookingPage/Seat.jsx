@@ -25,13 +25,14 @@ const Seat = (props) => {
                 }
             }}
             disabled={seat.daDat}
+            className='seat-booking'
             style={seat.daDat === true ?
-                { width: "40px", height: "40px", backgroundColor: "gray", fontSize: '12px' } :
+                {  backgroundColor: "gray", fontSize: '12px' } :
                 chose ?
-                    { width: "40px", height: "40px", backgroundColor: "red", fontSize: '12px' } :
+                    {  backgroundColor: "red", fontSize: '12px' } :
                     seat.loaiGhe === 'Vip' ?
-                    { width: "40px", height: "40px", backgroundColor: "orange", fontSize: '12px' } :
-                    { width: "40px", height: "40px", backgroundColor: "green", fontSize: '12px' } 
+                    {  backgroundColor: "orange", fontSize: '12px' } :
+                    {  backgroundColor: "green", fontSize: '12px' } 
 
             }>
             {seat.stt}

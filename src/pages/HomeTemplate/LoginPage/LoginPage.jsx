@@ -96,7 +96,10 @@ const LoginPage = (props) => {
             >
                 <div className='row justify-content-center '>
                     <div className="col-md-4 mt-5 border rounded py-5 mb-5 shadow">
-                        <img src="./images/user_login.png" alt="..." className='img-thumbnail rounded-circle'/>
+                        {/* <div style={{height:'300px'}}> */}
+
+                        <img  src="https://logodix.com/logo/1713924.png" alt="..." className='img-thumbnail rounded-circle'/>
+                        {/* </div> */}
                         <h1 className='mb-4 text-center'>Đăng nhập</h1>
                         <input onChange={handleOnchange} name='taiKhoan' className='form-control mt-2' type='text' placeholder='Tài khoản' />
                         <input onChange={handleOnchange} name='matKhau' className='form-control mt-2' type='password' placeholder='Mật khẩu' />

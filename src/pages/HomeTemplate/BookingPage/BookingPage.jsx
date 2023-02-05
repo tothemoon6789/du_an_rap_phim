@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useRef } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -9,13 +10,18 @@ import Seat from './Seat';
 
 const BookingPage = (props) => {
     const navigate = useNavigate()
+    const refTime = useRef()
     const [spiner, setSpiner] = useState(false)
     const [spinerBooking, setSpinerBooking] = useState(false);
     const [seat, setSeat] = useState([])
     const [info, setInfo] = useState({})
     const [seated, setSeated] = useState([]);
     const { booking, accessToken, allData } = props
-    console.log(allData);
+    const [time, setTime] = useState({
+        hour:0,
+        minute:0,
+        second :0,
+    })
     const [bookingAction, setBookingAction] = useState({
         maLichChieu: 0,
         danhSachVe: [
@@ -26,6 +32,23 @@ const BookingPage = (props) => {
             // }
         ]
     })
+   
+    useEffect(() => {
+        let timer = setInterval(() => {
+            const date = new Date();
+            setTime({
+                hour:date.getHours(),
+                minute:date.getMinutes(),
+                second:date.getSeconds(),
+            })
+            // let 
+            // console.log(date.getMilliseconds());
+        }, 1000);
+        return () => {
+            console.log('CLEAR INTERVAL');
+            clearInterval(timer)
+        }
+    },[])
     useEffect(() => {
         setBookingAction({
             ...bookingAction,
@@ -134,12 +157,12 @@ const BookingPage = (props) => {
             <div className='text-center'>
 
                 <h3>Thời gian đặt vé</h3>
-                <span>10:50</span>
+                <span>{time.hour}:{time.minute}:{time.second}</span>
             </div>
             <h3>{info.tenCumRap} {info.tenRap}</h3>
             <div className='row'>
                 <div className="col-md-7">
-                    <div className='mb-4 text-center py-4 text-white' style={{ backgroundColor: "black", fontSize: '35px' }}>Màn Chiếu</div>
+                    <div className='mb-4 text-center py-4 text-white' style={{ backgroundColor: "orange", fontSize: '35px' }}>Màn Chiếu</div>
                     {spiner ? <Spiner /> : ''}
                     {renderRow()}
                 </div>
@@ -200,6 +223,8 @@ const BookingPage = (props) => {
                                     navigate('/user')
                                 }).catch((error) => {
                                     console.log(error);
+                                    window.alert('Vui lòng đăng nhập trước khi đặt vé!')
+                                    navigate('/login')
                                 })
                             }}
                             className='btn btn-block btn-danger mt-3'>Đặt vé ngay</button>

@@ -62,14 +62,15 @@ const DetailPage = (props) => {
         }
     }
     const renderTheaterDetail = () => {
-if (theaterDetail.length>0) {
-    
-    return theaterDetail.map((item,index) => {
-        return <div key={index} className='p-4 '>
-                <Theater theater={item}/>
-            </div>
-        })
-    }
+        console.log(theaterDetail);
+        if (theaterDetail.length > 0) {
+
+            return theaterDetail.map((item, index) => {
+                return <div key={index} className='p-4 '>
+                    <Theater theater={item} />
+                </div>
+            })
+        }
     }
     return filmClicked.maPhim === undefined ?
         <div className="container">
@@ -79,7 +80,7 @@ if (theaterDetail.length>0) {
         (
             <>
                 <div className='container'>
-                    <nav  aria-label="breadcrumb">
+                    <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to='/' >Trang chủ</Link></li>
                             <li className="breadcrumb-item active" aria-current="page">Chi tiết</li>
@@ -131,7 +132,7 @@ if (theaterDetail.length>0) {
                                 <Week />
                             </div>
 
-                          {renderTheaterDetail()}
+                            {renderTheaterDetail()}
 
                         </div>
                     </div>

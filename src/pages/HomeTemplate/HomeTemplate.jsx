@@ -45,21 +45,25 @@ class HomeTemplate extends Component {
                                         <NavLink to="/comming-soon" className={({ isActive }) => isActive ? 'bg-primary text-white nav-link p-2' : 'nav-link p-2'} >Phim sắp chiếu</NavLink>
                                     </li>
                                 </ul>
-                                <button
-                                className='btn btn-default'
-                                    onClick={this.handleDarkTheme}>{theme==='darkTheme' ? <i style={{color:'white'}} className="fa-solid fa-sun" ></i>:<i className="fa-solid fa-moon"></i>}
-                                    
-                                </button>
-                                {accessToken === '' ?
-                                    <div>
 
+                                {accessToken === '' ?
+                                    <div className='d-flex justify-content-end' style={{ minWidth: '400px' }}>
+                                        <button
+                                            className='btn btn-default'
+                                            onClick={this.handleDarkTheme}>{theme === 'darkTheme' ? <i style={{ color: 'white' }} className="fa-solid fa-sun" ></i> : <i className="fa-solid fa-moon"></i>}
+
+                                        </button>
                                         <ButtonOutlineNavlink theme={theme} navlinkTo='/sign-in' buttonName='Đăng ký' />
                                         <ButtonNavlink theme={theme} navlinkTo='/login' buttonName='Đăng nhập' />
                                     </div>
 
                                     :
                                     <div>
+                                        <button
+                                            className='btn btn-default'
+                                            onClick={this.handleDarkTheme}>{theme === 'darkTheme' ? <i style={{ color: 'white' }} className="fa-solid fa-sun" ></i> : <i className="fa-solid fa-moon"></i>}
 
+                                        </button>
                                         <NavLink to='/user'> <img className='rounded-circle img-fluid ml-2' src="./images/img_avatar.png" width='50px' height='50px' alt="..." /></NavLink>
                                         <button onClick={() => {
                                             this.props.logOut()
@@ -79,50 +83,50 @@ class HomeTemplate extends Component {
                             <div className="row">
                                 <div className="col-md-4">
                                     <h4>GÓC ĐIỆN ẢNH</h4>
-                                    <ul className='list-unstyled'>
-                                        <li><a href="">THỂ LOẠI PHIM</a></li>
-                                        <li><a href="">BÌNH LUẬN PHIM</a></li>
-                                        <li><a href="">BLOG ĐIỆN ẢNH</a></li>
-                                        <li><a href="">PHIM HAY THÁNG</a></li>
+                                    <ul className='list-group list-group-flush'>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">THỂ LOẠI PHIM</a></li>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">BÌNH LUẬN PHIM</a></li>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">BLOG ĐIỆN ẢNH</a></li>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">PHIM HAY THÁNG</a></li>
                                     </ul>
                                 </div>
                                 <div className="col-md-4">
                                     <h4>HỖ TRỢ</h4>
-                                    <ul className='list-unstyled'>
-                                        <li><a href="">GÓP Ý</a></li>
-                                        <li><a href="">SALE &amp; SERVICES</a></li>
-                                        <li><a href="">RẠP</a></li>
-                                        <li><a href="">GIÁ VÉ TUYỂN DỤNG</a></li>
+                                    <ul className='list-group list-group-flush'>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">GÓP Ý</a></li>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">SALE &amp; SERVICES</a></li>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">RẠP</a></li>
+                                        <li className='list-group-item' style={{ background: 'none' }}><a href="">GIÁ VÉ TUYỂN DỤNG</a></li>
                                     </ul>
                                 </div>
                                 <div className="col-md-4">
                                     <h4>KẾT NỐI</h4>
                                     <button className='btn border'>
-                                        <i className="fab fa-facebook-square" />
+                                        <i className="fab fa-facebook-square text-primary" style={{ fontSize: '30px', }} />
 
                                     </button>
                                     <button className='btn border ml-2'>
-                                        <i className="fab fa-youtube" />
+                                        <i className="fab fa-youtube text-danger" style={{ fontSize: '30px', }} />
 
                                     </button>
                                     <button className='btn border ml-2'>
-                                        <i className="fab fa-instagram-square" />
+                                        <i className="fab fa-instagram-square text-warning" style={{ fontSize: '30px', }} />
 
                                     </button>
                                     <h4 className='mt-3'>Dowload APP</h4>
                                     <button className='btn border'>
-                                        <i className="fab fa-app-store-ios" />
+                                        <i className="fab fa-app-store-ios text-success" style={{ fontSize: '30px', }} />
 
                                     </button>
                                     <button className='btn border ml-2'>
-                                        <i className="fa-brands fa-android" />
+                                        <i className="fa-brands fa-android text-success" style={{ fontSize: '30px', }} />
 
                                     </button>
                                 </div>
                             </div>
-                            <hr className='bg-white' style={{opacity:'0.2'}}/>
+                            <hr className='bg-white' style={{ opacity: '0.2' }} />
                             <div>
-                                <i className="fa-solid fa-film" style={{ fontSize: '100px' }} />
+                                <i className="fa-solid fa-film text-primary" style={{ fontSize: '100px', }} />
                                 <h4>CÔNG TY TNHH MTV BBM MOVIE THEATER</h4>
                                 <address>
                                     ĐỊA CHỈ: 442 Nguyễn Thị Minh Khai, P.3, Hồ Chí Minh <br />
@@ -174,7 +178,7 @@ class HomeTemplate extends Component {
             })
         }
     }
-    
+
 
 }
 const mapStateToProp = (state) => {
