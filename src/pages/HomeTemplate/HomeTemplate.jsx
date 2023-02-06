@@ -112,17 +112,17 @@ const HomeTemplate = (props) => {
                                 <h4 className='mt-3'>Dowload APP</h4>
                                 <div className="d-flex">
 
-                                <div>
-                                    <img width={100} height={100} src="https://static.chotot.com/storage/default/group-qr.jpeg" alt="Download App" />
-                                </div>
-                                <div className='d-flex flex-column'>
-                                    <button className='btn'>
-                                        <img src="https://static.chotot.com/storage/default/ios.svg" alt="App Store" />
-                                    </button>
-                                    <button className='btn ml-2'>
-                                        <img src="https://static.chotot.com/storage/default/android.svg" alt="Play Store" />
-                                    </button>
-                                </div>
+                                    <div>
+                                        <img width={100} height={100} src="https://static.chotot.com/storage/default/group-qr.jpeg" alt="Download App" />
+                                    </div>
+                                    <div className='d-flex flex-column'>
+                                        <button className='btn'>
+                                            <img src="https://static.chotot.com/storage/default/ios.svg" alt="App Store" />
+                                        </button>
+                                        <button className='btn ml-2'>
+                                            <img src="https://static.chotot.com/storage/default/android.svg" alt="Play Store" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,8 @@ const HomeTemplate = (props) => {
                             <h4>CÔNG TY TNHH MTV BBM MOVIE THEATER</h4>
                             <address>
                                 ĐỊA CHỈ: 442 Nguyễn Thị Minh Khai, P.3, Hồ Chí Minh <br />
-                                Tel: <a href="tel:028990999">028.990.999</a>
+                                Tel: <a href="tel:028990999">028.990.999</a><br/>
+                                <span>Designed by: <a href="#">Linh Pham</a></span>
                             </address>
                         </div>
                     </div>

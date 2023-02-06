@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -24,7 +25,7 @@ const Theater = (props) => {
                             props.booking(item)
                         }} 
                         to='/booking'
-                        ><span className='font-weight-bold text-primary ml-2'>{item.ngayChieuGioChieu}</span></Link>
+                        ><span className='font-weight-bold text-primary ml-2'>{moment(item.ngayChieuGioChieu).format('DD/MM/YYYY')}</span></Link>
                         // giaVe
                         // : 
                         // 75000

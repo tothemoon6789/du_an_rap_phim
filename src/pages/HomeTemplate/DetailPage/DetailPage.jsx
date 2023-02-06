@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -101,7 +102,7 @@ const DetailPage = (props) => {
                                     </tr>
                                     <tr>
                                         <td className='border-bottom p-2'>Ngày khởi chiếu</td>
-                                        <td className='border-bottom p-2'>{filmClicked.ngayKhoiChieu}</td>
+                                        <td className='border-bottom p-2'>{moment(filmClicked.ngayKhoiChieu).format('DD/MM/YYYY')}</td>
                                     </tr>
                                     <tr>
                                         <td>
