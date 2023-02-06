@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { apiLogin } from '../../../service/apiHome';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import Spiner from '../../../components/Loading/Spiner';
 const LoginAdminPage = (props) => {
     const navigate = useNavigate();
     const [login, setLogin] = useState({
@@ -65,6 +65,9 @@ const LoginAdminPage = (props) => {
             })
         }
     }
+    const handleSpinerLoading = () => {
+        if(login.spiner) return <Spiner/>
+    }
     return (
         props.accessToken ?
             <>
@@ -104,11 +107,7 @@ const LoginAdminPage = (props) => {
                                 handelLogin()
                             }}
                             className='btn btn-block btn-primary mt-4'>Đăng nhập</button>
-                        {login.spiner ?
-                            <div className="d-flex justify-content-center">
-                                <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                            </div> : ''
-                        }
+                            {handleSpinerLoading()}
                     </div>
                 </div>
             </form>
